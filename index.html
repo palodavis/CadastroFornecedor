@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Fornecedores e Produtos</title>
+    <link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  
+</head>
+
+<body>
+    <div class="fluig-style-guide">
+        <div class="container-fluid">
+            <h1 class="fs-text-center">CADASTRO DE FORNECEDOR/PRODUTO</h1>
+            <form id="supplierForm">
+                <div class="border-black"> 
+                    <h2>Dados do Fornecedor</h2>
+                    <!-- Razão Social e CNPJ -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="companyName">Razão Social</label>
+                            <input type="text" class="form-control" id="companyName" required>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <label for="cnpj">CNPJ</label>
+                            <input type="text" class="form-control" id="cnpj" required>
+                        </div>
+                    </div>
+
+                    <!-- Nome Fantasia e Inscrição Estadual -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="fantasyName">Nome Fantasia</label>
+                            <input type="text" class="form-control" id="fantasyName" required>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <label for="stateRegistration">Inscrição Estadual</label>
+                            <input type="text" class="form-control" id="stateRegistration">
+                        </div>
+                    </div>
+
+                    <!-- CEP e Inscrição Municipal -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="cep">CEP</label>
+                            <input type="text" class="form-control" id="cep">
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <label for="municipalRegistration">Inscrição Municipal</label>
+                            <input type="text" class="form-control" id="municipalRegistration">
+                        </div>
+                    </div>
+
+                    <!-- Endereço e Número -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <label for="address">Endereço</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <label for="number">Número</label>
+                            <input type="text" class="form-control" id="number" required>
+                        </div>
+                    </div>
+
+                    <!-- Complemento -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <label for="complement">Complemento</label>
+                            <input type="text" class="form-control" id="complement">
+                        </div>
+                    </div>
+
+                    <!-- Bairro, Município e Estado -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" class="form-control" id="bairro" required>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <label for="municipio">Município</label>
+                            <input type="text" class="form-control" id="municipio" required>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <label for="estado">Estado</label>
+                            <input type="text" class="form-control" id="estado" required>
+                        </div>
+                    </div>
+
+                    <!-- Nome da Pessoa de Contato, Telefone e E-mail -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                            <label for="contactPerson">Nome da Pessoa de Contato</label>
+                            <input type="text" class="form-control" id="contactPerson" required>
+                        </div>
+                        <div class="col-xs-12 col-md-3">
+                            <label for="phone">Telefone</label>
+                            <input type="text" class="form-control" id="phone" required>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <div fluig-style-guide>
+            <div class="container-fluid border-black" >
+                <h2>Produtos</h2>
+                <form id="productForm">
+                    <div class="table-container">
+                        <table class="table table-bordered" id="productTable">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Unidade de Medida</th>
+                                    <th>Quantidade em Estoque</th>
+                                    <th>Valor Unitário</th>
+                                    <th>Valor Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" id="productDescription" required></td>
+                                    <td><input type="text" class="form-control" id="unitMeasure" required></td>
+                                    <td><input type="number" class="form-control" id="quantity" required></td>
+                                    <td><input type="number" class="form-control" id="unitPrice" required></td>
+                                    <td><input type="number" class="form-control" id="totalPrice" readonly></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-success btn-save" onclick="calculateTotal()">Adicionar produto</button>
+                    </div>
+                </form>
+            </div>
+      
+            <!-- Tabela de Anexos -->
+            <div class="container-fluid border-black" >
+            <h2>Anexos</h2>
+            <table class="table table-bordered" id="attachmentTable">
+                <thead>
+                    <tr>
+                        <th>Documento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="file" class="form-control" id="document"></td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-xs" onclick="deleteRow(this)">
+                                <img src="/icons/fluigicon-trash.png" class="" alt="Excluir">
+                            </button>
+                            <button type="button" class="btn btn-info btn-xs">
+                                <img src="/icons/fluigicon-eye-open.png" alt="Visualizar">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-success">Salvar Fornecedor</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
