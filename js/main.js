@@ -1,70 +1,70 @@
-$(document).ready(function () {
-    // Função para calcular o valor total automaticamente
-    $('#quantity, #unitPrice').on('input', function () {
-        let quantity = parseFloat($('#quantity').val());
-        let unitPrice = parseFloat($('#unitPrice').val());
-        let totalPrice = quantity * unitPrice;
-        $('#totalPrice').val(totalPrice.toFixed(2));
-    });
+let products = [];
+let attachments = [];
 
-    // Função para auto-preencher endereço pelo CEP
-    $('#address').on('input', function () {
-        let cep = $(this).val();
-        if (cep.length === 8) {
-            $.getJSON(`https://viacep.com.br/ws/${cep}/json/`, function (data) {
-                if (!("erro" in data)) {
-                    $('#address').val(data.logradouro);
-                }
-            });
-        }
-    });
-
-    // Função para salvar os dados e exibir o JSON no console
-    $('#supplierForm').submit(function (event) {
-        event.preventDefault();
-        let formData = {
-            companyName: $('#companyName').val(),
-            fantasyName: $('#fantasyName').val(),
-            cnpj: $('#cnpj').val(),
-            stateRegistration: $('#stateRegistration').val(),
-            municipalRegistration: $('#municipalRegistration').val(),
-            address: $('#address').val(),
-            contactPerson: $('#contactPerson').val(),
-            phone: $('#phone').val(),
-            email: $('#email').val(),
-            products: [{
-                description: $('#productDescription').val(),
-                unitMeasure: $('#unitMeasure').val(),
-                quantity: $('#quantity').val(),
-                unitPrice: $('#unitPrice').val(),
-                totalPrice: $('#totalPrice').val()
-            }],
-            attachments: [] // Aqui você pode adicionar lógica para os anexos
-        };
-        console.log(JSON.stringify(formData));
-        // Aqui você pode implementar a lógica para enviar o JSON
-    });
-});
-
-$(document).ready(function() {
-    $('#dropdownMenuButton').on('click', function() {
-        $('#unitMeasureDropdown').toggle();
-    });
-
-    $(document).on('click', function(event) {
-        if (!$(event.target).closest('.btn-group').length) {
-            $('#unitMeasureDropdown').hide();
-        }
-    });
-});
-
-function selectUnit(unit) {
-    $('#unitMeasure').val(unit);
-    $('#dropdownMenuButton').html(unit + ' <span class="caret"></span>');
-    $('#unitMeasureDropdown').hide();
+function toggleDropdown() {
+    const dropdown = document.getElementById('unitMeasureDropdown');
+    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
 }
 
-let attachments = [];
+function selectUnit(unit) {
+    document.getElementById('unitMeasure').value = unit;
+    document.getElementById('dropdownMenuButton').innerText = unit;
+    toggleDropdown(); // Fechar o dropdown após a seleção
+}
+
+function calculateTotal() {
+    const quantity = document.getElementById('quantity').value;
+    const unitPrice = document.getElementById('unitPrice').value;
+    document.getElementById('totalPrice').value = (quantity * unitPrice).toFixed(2);
+}
+
+function addProduct() {
+    const description = document.getElementById('productDescription').value;
+    const unitMeasure = document.getElementById('unitMeasure').value;
+    const quantity = document.getElementById('quantity').value;
+    const unitPrice = document.getElementById('unitPrice').value;
+    const totalPrice = document.getElementById('totalPrice').value;
+
+    if (!description || !unitMeasure || !quantity || !unitPrice) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    products.push({ description, unitMeasure, quantity, unitPrice, totalPrice });
+    updateProductTable();
+    clearProductForm();
+}
+
+function updateProductTable() {
+    const productTableBody = document.getElementById('productTableBody');
+    productTableBody.innerHTML = '';
+    products.forEach((product, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${product.description}</td>
+            <td>${product.unitMeasure}</td>
+            <td>${product.quantity}</td>
+            <td>${product.unitPrice}</td>
+            <td>${product.totalPrice}</td>
+            <td><button type="button" class="btn btn-danger" onclick="removeProduct(${index})">Remover</button></td>
+        `;
+        productTableBody.appendChild(row);
+    });
+}
+
+function clearProductForm() {
+    document.getElementById('productDescription').value = '';
+    document.getElementById('unitMeasure').value = '';
+    document.getElementById('quantity').value = '';
+    document.getElementById('unitPrice').value = '';
+    document.getElementById('totalPrice').value = '';
+    document.getElementById('dropdownMenuButton').innerText = 'Selecione a Unidade';
+}
+
+function removeProduct(index) {
+    products.splice(index, 1);
+    updateProductTable();
+}
 
 function addAttachment() {
     const fileInput = document.getElementById('fileInput');
@@ -73,9 +73,7 @@ function addAttachment() {
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            const base64File = e.target.result;
-            attachments.push({ name: file.name, data: base64File });
-            sessionStorage.setItem('attachments', JSON.stringify(attachments));
+            attachments.push({ name: file.name, content: e.target.result });
             updateAttachmentTable();
         };
         reader.readAsDataURL(file);
@@ -83,48 +81,130 @@ function addAttachment() {
 }
 
 function updateAttachmentTable() {
-    const attachmentTable = document.getElementById('attachmentTable').getElementsByTagName('tbody')[0];
-    attachmentTable.innerHTML = '';
+    const attachmentTableBody = document.querySelector('#attachmentTable tbody');
+    attachmentTableBody.innerHTML = '';
     attachments.forEach((attachment, index) => {
-        const row = attachmentTable.insertRow();
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-
-        cell1.textContent = attachment.name;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.className = 'btn btn-danger btn-xs';
-        deleteButton.innerHTML = '<img src="/icons/fluigicon-trash.png" alt="Excluir">';
-        deleteButton.onclick = () => deleteAttachment(index);
-
-        const viewButton = document.createElement('button');
-        viewButton.className = 'btn btn-info btn-xs';
-        viewButton.innerHTML = '<img src="/icons/fluigicon-eye-open.png" alt="Visualizar">';
-        viewButton.onclick = () => viewAttachment(index);
-
-        cell2.appendChild(deleteButton);
-        cell2.appendChild(viewButton);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${attachment.name}</td>
+            <td><button type="button" class="btn btn-danger" onclick="removeAttachment(${index})">Remover</button></td>
+        `;
+        attachmentTableBody.appendChild(row);
     });
 }
 
-function deleteAttachment(index) {
+function removeAttachment(index) {
     attachments.splice(index, 1);
-    sessionStorage.setItem('attachments', JSON.stringify(attachments));
     updateAttachmentTable();
 }
 
-function viewAttachment(index) {
-    const attachment = attachments[index];
-    const link = document.createElement('a');
-    link.href = attachment.data;
-    link.download = attachment.name;
-    link.click();
+function saveSupplier() {
+    // Mostrar modal de loading
+    document.getElementById('loadingModal').style.display = 'flex';
+
+    // Obter dados do fornecedor
+    const supplierData = {
+        razaoSocial: document.getElementById('razaoSocial').value,
+        nomeFantasia: document.getElementById('nomeFantasia').value,
+        cnpj: document.getElementById('cnpj').value,
+        inscricaoEstadual: document.getElementById('inscricaoEstadual').value,
+        inscricaoMunicipal: document.getElementById('inscricaoMunicipal').value,
+        nomeContato: document.getElementById('nomeContato').value,
+        telefoneContato: document.getElementById('telefoneContato').value,
+        emailContato: document.getElementById('emailContato').value,
+        cep: document.getElementById('cep').value,
+        endereco: document.getElementById('endereco').value,
+        numero: document.getElementById('numero').value,
+        complemento: document.getElementById('complemento').value,
+        bairro: document.getElementById('bairro').value,
+        municipio: document.getElementById('municipio').value,
+        estado: document.getElementById('estado').value,
+        produtos: products.map((product, index) => ({
+            indice: index + 1,
+            descricaoProduto: product.description,
+            unidadeMedida: product.unitMeasure,
+            qtdeEstoque: product.quantity,
+            valorUnitario: product.unitPrice,
+            valorTotal: product.totalPrice
+        })),
+        anexos: attachments.map((attachment, index) => ({
+            indice: index + 1,
+            nomeArquivo: attachment.name,
+            blobArquivo: attachment.data
+        }))
+    };
+
+    // Formatar JSON 
+    const formattedJSON = `
+    {
+        razaoSocial: '${supplierData.razaoSocial}',
+        nomeFantasia: '${supplierData.nomeFantasia}',
+        cnpj: '${supplierData.cnpj}',
+        inscricaoEstadual: '${supplierData.inscricaoEstadual}',
+        inscricaoMunicipal: '${supplierData.inscricaoMunicipal}',
+        nomeContato: '${supplierData.nomeContato}',
+        telefoneContato: '${supplierData.telefoneContato}',
+        emailContato: '${supplierData.emailContato}',
+        cep: '${supplierData.cep}',
+        endereco: '${supplierData.endereco}',
+        numero: '${supplierData.numero}',
+        complemento: '${supplierData.complemento}',
+        bairro: '${supplierData.bairro}',
+        municipio: '${supplierData.municipio}',
+        estado: '${supplierData.estado}',
+        produtos: [
+            ${supplierData.produtos.map(product => `
+                {
+                    indice: ${product.indice},
+                    descricaoProduto: '${product.descricaoProduto}',
+                    unidadeMedida: '${product.unidadeMedida}',
+                    qtdeEstoque: '${product.qtdeEstoque}',
+                    valorUnitario: '${product.valorUnitario}',
+                    valorTotal: '${product.valorTotal}'
+                }
+            `).join(',')}
+        ],
+        anexos: [
+            ${supplierData.anexos.map(attachment => `
+                {
+                    indice: ${attachment.indice},
+                    nomeArquivo: '${attachment.nomeArquivo}',
+                    blobArquivo: '${attachment.blobArquivo}'
+                }
+            `).join(',')}
+        ]
+    }`;
+
+    // Exibir JSON no console
+    console.log(formattedJSON);
+
+    // Simulação de salvamento dos dados
+    setTimeout(() => {
+        // Fechar o modal de loading após a simulação de salvamento
+        document.getElementById('loadingModal').style.display = 'none';
+        alert("Fornecedor salvo com sucesso!");
+    }, 2000);
 }
 
-window.onload = function () {
-    const storedAttachments = sessionStorage.getItem('attachments');
-    if (storedAttachments) {
-        attachments = JSON.parse(storedAttachments);
-        updateAttachmentTable();
+function fetchAddress() {
+    const cep = document.getElementById('cep').value.replace(/\D/g, '');
+
+    if (cep) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    document.getElementById('endereco').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('municipio').value = data.localidade;
+                    document.getElementById('estado').value = data.uf;
+                } else {
+                    alert('CEP não encontrado.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o endereço:', error);
+                alert('Erro ao buscar o endereço. Verifique o CEP e tente novamente.');
+            });
     }
-};
+}
