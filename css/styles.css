@@ -1,3 +1,23 @@
+.btn-success {
+    width: 100%;           /* Ocupa toda a largura do contêiner */
+    padding: 16px 24px;    /* Aumenta o espaçamento interno para tornar o botão maior */
+    font-size: 20px;       /* Aumenta o tamanho da fonte */
+    background-color: #007bff; /* Cor de fundo */
+    color: white;          /* Cor do texto */
+    border: none;          /* Remove borda padrão */
+    border-radius: 8px;    /* Bordas arredondadas */
+    cursor: pointer;       /* Aparece como um botão clicável */
+    text-align: center;    /* Centraliza o texto */
+    font-weight: bold;     /* Deixa o texto em negrito */
+    transition: background-color 0.3s ease; /* Suaviza a mudança de cor ao passar o mouse */
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    position: absolute;
+}
+
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -54,7 +74,28 @@
     border: 1px solid #0000004f;
     padding: 20px;
     margin-bottom: 20px;
+    border-radius: 8px;
+    position: relative; /* Necessário para posicionar o título */
 }
+
+.supplier-section {
+    padding-top: 60px; /* Espaço para o título */
+}
+
+.supplier-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #3b1de4af; /* Cor de fundo para a barra */
+    color: white; /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-sizing: border-box;
+}
+
 
 .table-container {
     margin-top: 20px;
@@ -78,3 +119,60 @@
     padding: 20px;
     border-radius: 5px;
 }
+
+.attachment-form {
+    border: 1px solid #ccc; /* Cor e estilo da borda */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-top: 15px;
+    position: relative; /* Necessário para posicionar o nome do item */
+    background-color: #ffffff; /* Cor de fundo branca */
+}
+
+.form-description {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#attachmentList {
+    margin-bottom: 10px;
+}
+
+.attachment-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd; /* Linha divisória entre os itens */
+    padding: 10px 0; /* Espaçamento interno dos itens */
+    position: relative; /* Necessário para posicionar o nome do item */
+    background-color: #ffffff; /* Cor de fundo branca */
+}
+
+.attachment-item span {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.attachment-item .item-label {
+    position: absolute;
+    bottom: 5px; /* Ajuste conforme necessário */
+    left: 10px; /* Ajuste conforme necessário */
+    font-size: 14px;
+    color: #333;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.action-btn img {
+    width: 20px; /* Ajuste conforme necessário */
+    height: 20px; /* Ajuste conforme necessário */
+}
+
+
+

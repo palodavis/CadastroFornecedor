@@ -66,19 +66,79 @@ function removeProduct(index) {
     updateProductTable();
 }
 
+let attachmentCounter = 1; // Contador para nomear os anexos
+
 function addAttachment() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
-
     if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            attachments.push({ name: file.name, content: e.target.result });
-            updateAttachmentTable();
+        const attachmentList = document.getElementById('attachmentList');
+        
+        // Criação do item de anexo
+        const attachmentItem = document.createElement('div');
+        attachmentItem.className = 'attachment-item';
+        
+        // Botão de visualizar com ícone
+        const viewBtn = document.createElement('button');
+        viewBtn.className = 'action-btn';
+        const viewIcon = document.createElement('img');
+        viewIcon.src = 'icons/fluigicon-eye-open.png'; 
+        viewIcon.alt = 'Visualizar';
+        viewBtn.appendChild(viewIcon);
+        viewBtn.onclick = function() {
+            const url = URL.createObjectURL(file);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name; // Nome do arquivo para download
+            a.click();
+            URL.revokeObjectURL(url);
         };
-        reader.readAsDataURL(file);
+        attachmentItem.appendChild(viewBtn);
+        
+        // Botão de remoção com ícone
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'action-btn';
+        const removeIcon = document.createElement('img');
+        removeIcon.src = 'icons/fluigicon-trash.png'; 
+        removeIcon.alt = 'Remover';
+        removeBtn.appendChild(removeIcon);
+        removeBtn.onclick = function() {
+            attachmentItem.remove();
+        };
+        attachmentItem.appendChild(removeBtn);
+        
+        // Nome do documento
+        const fileName = document.createElement('span');
+        fileName.textContent = `Documento Anexo ${attachmentCounter}`;
+        attachmentItem.appendChild(fileName);
+        
+        // Adiciona o item à lista de anexos
+        attachmentList.appendChild(attachmentItem);
+        
+        // Incrementa o contador
+        attachmentCounter++;
+        
+        // Limpa o input de arquivo
+        fileInput.value = '';
+    } else {
+        alert('Selecione um arquivo para anexar.');
     }
 }
+
+
+// function addAttachment() {
+//     const fileInput = document.getElementById('fileInput');
+//     const file = fileInput.files[0];
+
+//     if (file) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//             attachments.push({ name: file.name, content: e.target.result });
+//             updateAttachmentTable();
+//         };
+//         reader.readAsDataURL(file);
+//     }
+// }
 
 function updateAttachmentTable() {
     const attachmentTableBody = document.querySelector('#attachmentTable tbody');
@@ -99,6 +159,12 @@ function removeAttachment(index) {
 }
 
 function saveSupplier() {
+
+    // Validar os campos obrigatórios
+    if (!validateForm()) {
+        return;
+    }
+
     // Mostrar modal de loading
     document.getElementById('loadingModal').style.display = 'flex';
 
@@ -206,5 +272,88 @@ function fetchAddress() {
                 console.error('Erro ao buscar o endereço:', error);
                 alert('Erro ao buscar o endereço. Verifique o CEP e tente novamente.');
             });
+    }
+}
+
+function validateForm() {
+    let isValid = true;
+
+    // Valida Razão Social
+    const razaoSocial = document.getElementById('razaoSocial');
+    if (razaoSocial.value.trim() === '') {
+        document.getElementById('razaoSocialError').textContent = 'Razão Social: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('razaoSocialError').textContent = '';
+    }
+
+    // Valida Nome Fantasia
+    const nomeFantasia = document.getElementById('nomeFantasia');
+    if (nomeFantasia.value.trim() === '') {
+        document.getElementById('nomeFantasiaError').textContent = 'Nome Fantasia: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('nomeFantasiaError').textContent = '';
+    }
+
+    // Valida CNPJ
+    const cnpj = document.getElementById('cnpj');
+    if (cnpj.value.trim() === '') {
+        document.getElementById('cnpjError').textContent = 'CNPJ: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('cnpjError').textContent = '';
+    }
+
+    // Valida Nome do Contato
+    const nomeContato = document.getElementById('nomeContato');
+    if (nomeContato.value.trim() === '') {
+        document.getElementById('nomeContatoError').textContent = 'Nome da pessoa de contato: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('nomeContatoError').textContent = '';
+    }
+
+    // Valida Telefone
+    const telefoneContato = document.getElementById('telefoneContato');
+    if (telefoneContato.value.trim() === '') {
+        document.getElementById('telefoneContatoError').textContent = 'Telefone: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('telefoneContatoError').textContent = '';
+    }
+
+    // Valida E-mail
+    const emailContato = document.getElementById('emailContato');
+    if (emailContato.value.trim() === '') {
+        document.getElementById('emailContatoError').textContent = 'E-mail: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('emailContatoError').textContent = '';
+    }
+
+    // Valida Endereço
+    const endereco = document.getElementById('endereco');
+    if (endereco.value.trim() === '') {
+        document.getElementById('enderecoError').textContent = 'Endereço: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('enderecoError').textContent = '';
+    }
+
+    // Valida CEP
+    const cep = document.getElementById('cep');
+    if (cep.value.trim() === '') {
+        document.getElementById('cepError').textContent = 'CEP: obrigatório';
+        isValid = false;
+    } else {
+        document.getElementById('cepError').textContent = '';
+    }
+
+    // Se o formulário for válido, exibe o modal de loading e salva os dados
+    if (isValid) {
+        saveSupplier();
+    } else {
+        alert('Por favor, corrija os erros no formulário antes de continuar.');
     }
 }
