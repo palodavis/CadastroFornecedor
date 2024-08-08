@@ -45,3 +45,86 @@ $(document).ready(function () {
         // Aqui você pode implementar a lógica para enviar o JSON
     });
 });
+
+$(document).ready(function() {
+    $('#dropdownMenuButton').on('click', function() {
+        $('#unitMeasureDropdown').toggle();
+    });
+
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('.btn-group').length) {
+            $('#unitMeasureDropdown').hide();
+        }
+    });
+});
+
+function selectUnit(unit) {
+    $('#unitMeasure').val(unit);
+    $('#dropdownMenuButton').html(unit + ' <span class="caret"></span>');
+    $('#unitMeasureDropdown').hide();
+}
+
+let attachments = [];
+
+function addAttachment() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const base64File = e.target.result;
+            attachments.push({ name: file.name, data: base64File });
+            sessionStorage.setItem('attachments', JSON.stringify(attachments));
+            updateAttachmentTable();
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function updateAttachmentTable() {
+    const attachmentTable = document.getElementById('attachmentTable').getElementsByTagName('tbody')[0];
+    attachmentTable.innerHTML = '';
+    attachments.forEach((attachment, index) => {
+        const row = attachmentTable.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+
+        cell1.textContent = attachment.name;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'btn btn-danger btn-xs';
+        deleteButton.innerHTML = '<img src="/icons/fluigicon-trash.png" alt="Excluir">';
+        deleteButton.onclick = () => deleteAttachment(index);
+
+        const viewButton = document.createElement('button');
+        viewButton.className = 'btn btn-info btn-xs';
+        viewButton.innerHTML = '<img src="/icons/fluigicon-eye-open.png" alt="Visualizar">';
+        viewButton.onclick = () => viewAttachment(index);
+
+        cell2.appendChild(deleteButton);
+        cell2.appendChild(viewButton);
+    });
+}
+
+function deleteAttachment(index) {
+    attachments.splice(index, 1);
+    sessionStorage.setItem('attachments', JSON.stringify(attachments));
+    updateAttachmentTable();
+}
+
+function viewAttachment(index) {
+    const attachment = attachments[index];
+    const link = document.createElement('a');
+    link.href = attachment.data;
+    link.download = attachment.name;
+    link.click();
+}
+
+window.onload = function () {
+    const storedAttachments = sessionStorage.getItem('attachments');
+    if (storedAttachments) {
+        attachments = JSON.parse(storedAttachments);
+        updateAttachmentTable();
+    }
+};

@@ -1,13 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Fornecedores e Produtos</title>
-    <link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/fluig-style-guide.min.css">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-  
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .dropdown-menu li {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: #eee;
+        }
+
+        .btn-group {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .btn-dropdown {
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .caret {
+            float: right;
+            margin-top: 8px;
+            border-top: 4px solid;
+            border-right: 4px solid transparent;
+            border-left: 4px solid transparent;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .container-fluid {
+            margin: 20px;
+        }
+
+        .border-black {
+            border: 1px solid #0000004f;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        .loading-modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,158 +96,338 @@
         <div class="container-fluid">
             <h1 class="fs-text-center">CADASTRO DE FORNECEDOR/PRODUTO</h1>
             <form id="supplierForm">
-                <div class="border-black"> 
-                    <h2>Dados do Fornecedor</h2>
-                    <!-- Razão Social e CNPJ -->
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <label for="companyName">Razão Social</label>
-                            <input type="text" class="form-control" id="companyName" required>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <label for="cnpj">CNPJ</label>
-                            <input type="text" class="form-control" id="cnpj" required>
-                        </div>
-                    </div>
-
-                    <!-- Nome Fantasia e Inscrição Estadual -->
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <label for="fantasyName">Nome Fantasia</label>
-                            <input type="text" class="form-control" id="fantasyName" required>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <label for="stateRegistration">Inscrição Estadual</label>
-                            <input type="text" class="form-control" id="stateRegistration">
-                        </div>
-                    </div>
-
-                    <!-- CEP e Inscrição Municipal -->
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <label for="cep">CEP</label>
-                            <input type="text" class="form-control" id="cep">
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <label for="municipalRegistration">Inscrição Municipal</label>
-                            <input type="text" class="form-control" id="municipalRegistration">
-                        </div>
-                    </div>
-
-                    <!-- Endereço e Número -->
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <label for="address">Endereço</label>
-                            <input type="text" class="form-control" id="address" required>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <label for="number">Número</label>
-                            <input type="text" class="form-control" id="number" required>
-                        </div>
-                    </div>
-
-                    <!-- Complemento -->
-                    <div class="row">
-                        <div class="col-xs-12 col-md-12">
-                            <label for="complement">Complemento</label>
-                            <input type="text" class="form-control" id="complement">
-                        </div>
-                    </div>
-
-                    <!-- Bairro, Município e Estado -->
-                    <div class="row">
-                        <div class="col-xs-12 col-md-4">
-                            <label for="bairro">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" required>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <label for="municipio">Município</label>
-                            <input type="text" class="form-control" id="municipio" required>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <label for="estado">Estado</label>
-                            <input type="text" class="form-control" id="estado" required>
-                        </div>
-                    </div>
-
-                    <!-- Nome da Pessoa de Contato, Telefone e E-mail -->
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5">
-                            <label for="contactPerson">Nome da Pessoa de Contato</label>
-                            <input type="text" class="form-control" id="contactPerson" required>
-                        </div>
-                        <div class="col-xs-12 col-md-3">
-                            <label for="phone">Telefone</label>
-                            <input type="text" class="form-control" id="phone" required>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <label for="email">E-mail</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="razaoSocial">Razão Social</label>
+                    <input type="text" id="razaoSocial" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="nomeFantasia">Nome Fantasia</label>
+                    <input type="text" id="nomeFantasia" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text" id="cnpj" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="inscricaoEstadual">Inscrição Estadual</label>
+                    <input type="text" id="inscricaoEstadual" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="inscricaoMunicipal">Inscrição Municipal</label>
+                    <input type="text" id="inscricaoMunicipal" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="nomeContato">Nome do Contato</label>
+                    <input type="text" id="nomeContato" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefoneContato">Telefone do Contato</label>
+                    <input type="text" id="telefoneContato" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailContato">E-mail do Contato</label>
+                    <input type="email" id="emailContato" class="form-control" required>
+                </div>
+                <!-- Campos de Endereço -->
+                <div class="form-group">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" id="endereco" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="numero">Número</label>
+                    <input type="text" id="numero" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="complemento">Complemento</label>
+                    <input type="text" id="complemento" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" id="bairro" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="municipio">Município</label>
+                    <input type="text" id="municipio" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <input type="text" id="estado" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" class="form-control" required>
                 </div>
             </form>
-            
-            <div fluig-style-guide>
-            <div class="container-fluid border-black" >
+            <div class="container-fluid border-black">
                 <h2>Produtos</h2>
                 <form id="productForm">
-                    <div class="table-container">
-                        <table class="table table-bordered" id="productTable">
-                            <thead>
-                                <tr>
-                                    <th>Descrição</th>
-                                    <th>Unidade de Medida</th>
-                                    <th>Quantidade em Estoque</th>
-                                    <th>Valor Unitário</th>
-                                    <th>Valor Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class="form-control" id="productDescription" required></td>
-                                    <td><input type="text" class="form-control" id="unitMeasure" required></td>
-                                    <td><input type="number" class="form-control" id="quantity" required></td>
-                                    <td><input type="number" class="form-control" id="unitPrice" required></td>
-                                    <td><input type="number" class="form-control" id="totalPrice" readonly></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" class="btn btn-success btn-save" onclick="calculateTotal()">Adicionar produto</button>
+                    <div class="form-group">
+                        <label for="productDescription">Descrição</label>
+                        <input type="text" id="productDescription" class="form-control" required>
                     </div>
+                    <div class="form-group">
+                        <label for="unitMeasureDropdown">Unidade de Medida</label>
+                        <div class="btn-group">
+                            <button type="button" id="dropdownMenuButton" class="btn-dropdown"
+                                onclick="toggleDropdown()">Selecione a Unidade <span class="caret"></span></button>
+                            <ul id="unitMeasureDropdown" class="dropdown-menu">
+                                <li onclick="selectUnit('Unidade1')">Unidade1</li>
+                                <li onclick="selectUnit('Unidade2')">Unidade2</li>
+                                <!-- Adicione mais opções conforme necessário -->
+                            </ul>
+                        </div>
+                        <input type="hidden" id="unitMeasure" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantidade em Estoque</label>
+                        <input type="number" id="quantity" class="form-control" oninput="calculateTotal()" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="unitPrice">Valor Unitário</label>
+                        <input type="number" id="unitPrice" class="form-control" step="0.01" oninput="calculateTotal()"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="totalPrice">Valor Total</label>
+                        <input type="number" id="totalPrice" class="form-control" step="0.01" readonly>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Adicionar Produto</button>
                 </form>
+                <div class="table-container">
+                    <table class="table table-bordered" id="productTable">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Unidade de Medida</th>
+                                <th>Quantidade em Estoque</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <!-- Linhas de produtos serão adicionadas aqui -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-      
-            <!-- Tabela de Anexos -->
-            <div class="container-fluid border-black" >
-            <h2>Anexos</h2>
-            <table class="table table-bordered" id="attachmentTable">
-                <thead>
-                    <tr>
-                        <th>Documento</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="file" class="form-control" id="document"></td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-xs" onclick="deleteRow(this)">
-                                <img src="/icons/fluigicon-trash.png" class="" alt="Excluir">
-                            </button>
-                            <button type="button" class="btn btn-info btn-xs">
-                                <img src="/icons/fluigicon-eye-open.png" alt="Visualizar">
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 
-            <button type="button" class="btn btn-success">Salvar Fornecedor</button>
+            <div class="container-fluid border-black">
+                <h2>Anexos</h2>
+                <table class="table table-bordered" id="attachmentTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas de anexos serão adicionadas aqui -->
+                    </tbody>
+                </table>
+                <input type="file" class="form-control" id="fileInput">
+                <button type="button" class="btn btn-success" onclick="addAttachment()">Incluir Anexo</button>
+                <button type="button" class="btn btn-success" onclick="saveSupplier()">Salvar Fornecedor</button>
             </div>
         </div>
     </div>
 
+    <!-- Modal de loading -->
+    <div class="loading-modal" id="loadingModal">
+        <div class="loading-modal-content">
+            <p>Salvando fornecedor...</p>
+        </div>
+    </div>
+
+    <script>
+        let products = [];
+        let attachments = [];
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('unitMeasureDropdown');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function selectUnit(unit) {
+            document.getElementById('unitMeasure').value = unit;
+            document.getElementById('dropdownMenuButton').innerText = unit;
+            toggleDropdown(); // Fechar o dropdown após a seleção
+        }
+
+        function calculateTotal() {
+            const quantity = document.getElementById('quantity').value;
+            const unitPrice = document.getElementById('unitPrice').value;
+            document.getElementById('totalPrice').value = (quantity * unitPrice).toFixed(2);
+        }
+
+        function addProduct() {
+            const description = document.getElementById('productDescription').value;
+            const unitMeasure = document.getElementById('unitMeasure').value;
+            const quantity = document.getElementById('quantity').value;
+            const unitPrice = document.getElementById('unitPrice').value;
+            const totalPrice = document.getElementById('totalPrice').value;
+
+            if (!description || !unitMeasure || !quantity || !unitPrice) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            products.push({ description, unitMeasure, quantity, unitPrice, totalPrice });
+            updateProductTable();
+            clearProductForm();
+        }
+
+        function updateProductTable() {
+            const productTableBody = document.getElementById('productTableBody');
+            productTableBody.innerHTML = '';
+            products.forEach((product, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.description}</td>
+                    <td>${product.unitMeasure}</td>
+                    <td>${product.quantity}</td>
+                    <td>${product.unitPrice}</td>
+                    <td>${product.totalPrice}</td>
+                    <td><button type="button" class="btn btn-danger" onclick="removeProduct(${index})">Remover</button></td>
+                `;
+                productTableBody.appendChild(row);
+            });
+        }
+
+        function clearProductForm() {
+            document.getElementById('productDescription').value = '';
+            document.getElementById('unitMeasure').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('unitPrice').value = '';
+            document.getElementById('totalPrice').value = '';
+            document.getElementById('dropdownMenuButton').innerText = 'Selecione a Unidade';
+        }
+
+        function removeProduct(index) {
+            products.splice(index, 1);
+            updateProductTable();
+        }
+
+        function addAttachment() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    attachments.push({ name: file.name, content: e.target.result });
+                    updateAttachmentTable();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateAttachmentTable() {
+            const attachmentTableBody = document.querySelector('#attachmentTable tbody');
+            attachmentTableBody.innerHTML = '';
+            attachments.forEach((attachment, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${attachment.name}</td>
+                    <td><button type="button" class="btn btn-danger" onclick="removeAttachment(${index})">Remover</button></td>
+                `;
+                attachmentTableBody.appendChild(row);
+            });
+        }
+
+        function removeAttachment(index) {
+            attachments.splice(index, 1);
+            updateAttachmentTable();
+        }
+
+        function saveSupplier() {
+            // Mostrar modal de loading
+            document.getElementById('loadingModal').style.display = 'flex';
+
+            // Obter dados do fornecedor
+            const supplierData = {
+                razaoSocial: document.getElementById('razaoSocial').value,
+                nomeFantasia: document.getElementById('nomeFantasia').value,
+                cnpj: document.getElementById('cnpj').value,
+                inscricaoEstadual: document.getElementById('inscricaoEstadual').value,
+                inscricaoMunicipal: document.getElementById('inscricaoMunicipal').value,
+                nomeContato: document.getElementById('nomeContato').value,
+                telefoneContato: document.getElementById('telefoneContato').value,
+                emailContato: document.getElementById('emailContato').value,
+                cep: document.getElementById('cep').value,
+                endereco: document.getElementById('endereco').value,
+                numero: document.getElementById('numero').value,
+                complemento: document.getElementById('complemento').value,
+                bairro: document.getElementById('bairro').value,
+                municipio: document.getElementById('municipio').value,
+                estado: document.getElementById('estado').value,
+                produtos: products.map((product, index) => ({
+                    indice: index + 1,
+                    descricaoProduto: product.description,
+                    unidadeMedida: product.unitMeasure,
+                    qtdeEstoque: product.quantity,
+                    valorUnitario: product.unitPrice,
+                    valorTotal: product.totalPrice
+                })),
+                anexos: attachments.map((attachment, index) => ({
+                    indice: index + 1,
+                    nomeArquivo: attachment.name,
+                    blobArquivo: attachment.data
+                }))
+            };
+
+            // Formatar JSON 
+            const formattedJSON = `
+            {
+                razaoSocial: '${supplierData.razaoSocial}',
+                nomeFantasia: '${supplierData.nomeFantasia}',
+                cnpj: '${supplierData.cnpj}',
+                inscricaoEstadual: '${supplierData.inscricaoEstadual}',
+                inscricaoMunicipal: '${supplierData.inscricaoMunicipal}',
+                nomeContato: '${supplierData.nomeContato}',
+                telefoneContato: '${supplierData.telefoneContato}',
+                emailContato: '${supplierData.emailContato}',
+                cep: '${supplierData.cep}',
+                endereco: '${supplierData.endereco}',
+                numero: '${supplierData.numero}',
+                complemento: '${supplierData.complemento}',
+                bairro: '${supplierData.bairro}',
+                municipio: '${supplierData.municipio}',
+                estado: '${supplierData.estado}',
+                produtos: [
+                    ${supplierData.produtos.map(product => `
+                        {
+                            indice: ${product.indice},
+                            descricaoProduto: '${product.descricaoProduto}',
+                            unidadeMedida: '${product.unidadeMedida}',
+                            qtdeEstoque: '${product.qtdeEstoque}',
+                            valorUnitario: '${product.valorUnitario}',
+                            valorTotal: '${product.valorTotal}'
+                        }
+                    `).join(',')}
+                ],
+                anexos: [
+                    ${supplierData.anexos.map(attachment => `
+                        {
+                            indice: ${attachment.indice},
+                            nomeArquivo: '${attachment.nomeArquivo}',
+                            blobArquivo: '${attachment.blobArquivo}'
+                        }
+                    `).join(',')}
+                ]
+            }`;
+
+            // Exibir JSON no console
+            console.log(formattedJSON);
+
+            // Simulação de salvamento dos dados
+            setTimeout(() => {
+                // Fechar o modal de loading após a simulação de salvamento
+                document.getElementById('loadingModal').style.display = 'none';
+                alert("Fornecedor salvo com sucesso!");
+            }, 2000);
+        }
+    </script>
 </body>
 
 </html>
