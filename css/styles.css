@@ -5,6 +5,7 @@
     color: red;
     font-size: 20px;
 }
+
 .btn-success {
     width: 100%;           /* Ocupa toda a largura do contêiner */
     padding: 16px 24px;    /* Aumenta o espaçamento interno para tornar o botão maior */
@@ -224,8 +225,8 @@
 }
 
 .action-btn img {
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
 }
 
 .product-item-container {
@@ -246,8 +247,8 @@
 }
 
 .remove-btn img {
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
 }
 
 
@@ -258,4 +259,54 @@
     padding: 15px; /* Adiciona um pouco de espaço interno */
     background-color: #fff; /* Define a cor de fundo */
     margin-left: 15px; /* Espaço entre o botão de remoção e o formulário */
+}
+
+.box-icon {
+    margin-right: 15px; /* Espaço entre o ícone e os campos do formulário */
+}
+
+.box-icon img {
+    width: 100px; /* Ajuste o tamanho conforme necessário */
+    height: 100px; /* Ajuste o tamanho conforme necessário */
+}
+
+.product-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px; /* Ajuste conforme necessário */
+}
+
+.product-form {
+    flex: 1; /* Faz com que o formulário ocupe o espaço restante */
+    border: 1px solid #ddd; /* Adiciona uma borda ao formulário */
+    border-radius: 8px; /* Arredonda as bordas do formulário */
+    padding: 15px; /* Adiciona um pouco de espaço interno */
+    background-color: #fff; /* Define a cor de fundo */
+    margin-left: 15px; /* Espaço entre o formulário e o botão de remoção */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Garante que o conteúdo esteja alinhado ao topo */
+}
+
+.form-content {
+    display: flex;
+    align-items: flex-start;
+    width: 100%; /* Garante que o conteúdo ocupe toda a largura disponível */
+}
+
+.box-icon {
+    margin-right: 15px; /* Espaço entre o ícone e os campos do formulário */
+    display: flex;
+    align-items: center; /* Garante que o ícone esteja alinhado ao centro verticalmente */
+    margin-top: 19px; /* Ajuste a margem superior para posicionar o ícone mais para baixo */
+}
+
+
+.box-icon img {
+    width: 100x; /* Ajuste o tamanho conforme necessário */
+    height: 100px; /* Ajuste o tamanho conforme necessário */
+}
+
+.product-details {
+    flex: 1; /* Faz com que os detalhes do produto ocupem o espaço restante */
 }

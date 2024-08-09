@@ -58,45 +58,54 @@ function updateProductDisplay() {
         const productForm = document.createElement('form');
         productForm.className = 'product-form';
         productForm.innerHTML = `
-            <h3>Produto ${index + 1}</h3> <!-- Atualiza o título do formulário -->
-            <div class="row">
-                <!-- Descrição do produto -->
-                <div class="col-xs-12 col-md-12">
-                    <div class="input-container">
-                        <label>Descrição</label>
-                        <input type="text" class="form-control" value="${product.description}" readonly>
+                    <h3>Produto ${index + 1}</h3>
+                    <div class="form-content">
+                        <!-- Ícone de caixa -->
+                        <div class="box-icon">
+                            <img src="icons/box.png" alt="Caixa">
+                        </div>
+                        <!-- Campos do produto -->
+                        <div class="product-details">
+                            <div class="row">
+                                <!-- Descrição do produto -->
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="input-container">
+                                        <label>Descrição</label>
+                                        <input type="text" class="form-control" value="${product.description}" readonly>
+                                    </div>
+                                </div>
+                                <!-- Unidade de Medida -->
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="input-container">
+                                        <label>Unidade de Medida</label>
+                                        <input type="text" class="form-control" value="${product.unitMeasure}" readonly>
+                                    </div>
+                                </div>
+                                <!-- Quantidade em Estoque -->
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="input-container">
+                                        <label>Quantidade em Estoque</label>
+                                        <input type="number" class="form-control" value="${product.quantity}" readonly>
+                                    </div>
+                                </div>
+                                <!-- Valor Unitário -->
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="input-container">
+                                        <label>Valor Unitário</label>
+                                        <input type="number" class="form-control" value="${product.unitPrice}" readonly>
+                                    </div>
+                                </div>
+                                <!-- Valor Total -->
+                                <div class="col-xs-12 col-md-3">
+                                    <div class="input-container">
+                                        <label>Valor Total</label>
+                                        <input type="number" class="form-control" value="${product.totalPrice}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <!-- Unidade de Medida -->
-                <div class="col-xs-12 col-md-3">
-                    <div class="input-container">
-                        <label>Unidade de Medida</label>
-                        <input type="text" class="form-control" value="${product.unitMeasure}" readonly>
-                    </div>
-                </div>
-                <!-- Quantidade em Estoque -->
-                <div class="col-xs-12 col-md-3">
-                    <div class="input-container">
-                        <label>Quantidade em Estoque</label>
-                        <input type="number" class="form-control" value="${product.quantity}" readonly>
-                    </div>
-                </div>
-                <!-- Valor Unitário -->
-                <div class="col-xs-12 col-md-3">
-                    <div class="input-container">
-                        <label>Valor Unitário</label>
-                        <input type="number" class="form-control" value="${product.unitPrice}" readonly>
-                    </div>
-                </div>
-                <!-- Valor Total -->
-                <div class="col-xs-12 col-md-3">
-                    <div class="input-container">
-                        <label>Valor Total</label>
-                        <input type="number" class="form-control" value="${product.totalPrice}" readonly>
-                    </div>
-                </div>
-            </div>
-        `;
+                `;
 
         // Adiciona o formulário e o botão de remoção ao container do produto
         productContainer.appendChild(removeBtn);
