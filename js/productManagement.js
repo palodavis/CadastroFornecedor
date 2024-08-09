@@ -117,7 +117,7 @@ function updateProductDisplay() {
     });
 }
 
-
+// Limpar o formulário
 function clearProductForm() {
     document.getElementById('productDescription').value = '';
     document.getElementById('unitMeasure').value = '';
@@ -127,6 +127,7 @@ function clearProductForm() {
     document.getElementById('dropdownMenuButton').innerText = 'Selecione a Unidade';
 }
 
+// Remover um produto
 function removeProduct(index) {
     products.splice(index, 1);
     updateProductDisplay();

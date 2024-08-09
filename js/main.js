@@ -53,7 +53,7 @@ function saveSupplier() {
         });
     });
 
-    // Espera que todos os arquivos sejam convertidos antes de continuar
+    // Os arquivos sejam convertidos antes de continuar
     Promise.all(promises).then(() => {
         // Formatar JSON 
         const formattedJSON = JSON.stringify(supplierData, null, 4);
@@ -66,10 +66,32 @@ function saveSupplier() {
             // Fechar o modal de loading após a simulação de salvamento
             document.getElementById('loadingModal').style.display = 'none';
             alert("Fornecedor salvo com sucesso!");
+            // Limpar campos do formulário
+            clearSupplierForm();
         }, 2000);
     }).catch(error => {
         console.error('Erro ao processar anexos:', error);
         document.getElementById('loadingModal').style.display = 'none';
         alert("Erro ao salvar o fornecedor.");
     });
+}
+
+
+// Limpar o formulário
+function clearSupplierForm() {
+    document.getElementById('razaoSocial').value = '';
+    document.getElementById('nomeFantasia').value = '';
+    document.getElementById('cnpj').value = '';
+    document.getElementById('inscricaoEstadual').value = '';
+    document.getElementById('inscricaoMunicipal').value = '';
+    document.getElementById('nomeContato').value = '';
+    document.getElementById('telefoneContato').value = '';
+    document.getElementById('emailContato').value = '';
+    document.getElementById('cep').value = '';
+    document.getElementById('endereco').value = '';
+    document.getElementById('numero').value = '';
+    document.getElementById('complemento').value = '';
+    document.getElementById('bairro').value = '';
+    document.getElementById('municipio').value = '';
+    document.getElementById('estado').value = '';
 }

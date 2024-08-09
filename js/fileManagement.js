@@ -1,6 +1,7 @@
 let attachmentCounter = 1; // Contador para nomear os anexos
 let attachments = [];
 
+// Função para adicionar arquivos
 function addAttachment() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
@@ -75,6 +76,7 @@ function addAttachment() {
     }
 }
 
+// Atualizar tabela dos arquivos
 function updateAttachmentTable() {
     const attachmentTableBody = document.querySelector('#attachmentTable tbody');
     attachmentTableBody.innerHTML = '';
@@ -88,6 +90,7 @@ function updateAttachmentTable() {
     });
 }
 
+// Remoção do arquivo
 function removeAttachment(index) {
     attachments.splice(index, 1);
     updateAttachmentTable();
