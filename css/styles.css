@@ -228,16 +228,34 @@
     height: 24px;
 }
 
-/* Ajustar o ícone de remoção */
-.product-item .action-btn {
+.product-item-container {
     display: flex;
-    align-items: center; 
-    justify-content: center;
-    background: none; 
-    border: none; 
-    padding: 0; 
+    align-items: flex-start;
+    margin-bottom: 10px;
+    padding: 10px; 
 }
 
-.product-item .action-btn img {
-    margin-top: 25px; 
+.remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 40px; 
+    display: flex;
+    align-items: center;
+    transform: translateY(80px); 
+}
+
+.remove-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+
+.product-form {
+    flex: 1; /* Faz com que o formulário ocupe o espaço restante */
+    border: 1px solid #ddd; /* Adiciona uma borda ao formulário */
+    border-radius: 8px; /* Arredonda as bordas do formulário */
+    padding: 15px; /* Adiciona um pouco de espaço interno */
+    background-color: #fff; /* Define a cor de fundo */
+    margin-left: 15px; /* Espaço entre o botão de remoção e o formulário */
 }

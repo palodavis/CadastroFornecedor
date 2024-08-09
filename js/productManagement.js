@@ -34,6 +34,7 @@ function addProduct() {
     updateProductDisplay();
     clearProductForm();
 }
+
 function updateProductDisplay() {
     const productList = document.querySelector('.product-list');
     productList.innerHTML = '';
@@ -41,81 +42,71 @@ function updateProductDisplay() {
     products.forEach((product, index) => {
         // Criação do container do produto
         const productContainer = document.createElement('div');
-        productContainer.className = 'row product-item';
+        productContainer.className = 'product-item-container';
 
-        // Botão de Remoção
-        const removeDiv = document.createElement('div');
-        removeDiv.className = 'col-xs-12 col-md-1';
+        // Criação do botão de remoção com ícone
         const removeBtn = document.createElement('button');
-        removeBtn.className = 'action-btn';
+        removeBtn.className = 'remove-btn';
         removeBtn.type = 'button';
         removeBtn.onclick = () => removeProduct(index);
         const removeIcon = document.createElement('img');
         removeIcon.src = 'icons/fluigicon-trash.png';
         removeIcon.alt = 'Remover';
         removeBtn.appendChild(removeIcon);
-        removeDiv.appendChild(removeBtn);
-        productContainer.appendChild(removeDiv);
 
-        // Descrição do produto
-        const descriptionDiv = document.createElement('div');
-        descriptionDiv.className = 'col-xs-12 col-md-2';
-        descriptionDiv.innerHTML = `
-            <div class="input-container">
-                <label>Descrição</label>
-                <input type="text" class="form-control" value="${product.description}" readonly>
+        // Criação do formulário do produto
+        const productForm = document.createElement('form');
+        productForm.className = 'product-form';
+        productForm.innerHTML = `
+            <h3>Produto ${index + 1}</h3> <!-- Atualiza o título do formulário -->
+            <div class="row">
+                <!-- Descrição do produto -->
+                <div class="col-xs-12 col-md-12">
+                    <div class="input-container">
+                        <label>Descrição</label>
+                        <input type="text" class="form-control" value="${product.description}" readonly>
+                    </div>
+                </div>
+                <!-- Unidade de Medida -->
+                <div class="col-xs-12 col-md-3">
+                    <div class="input-container">
+                        <label>Unidade de Medida</label>
+                        <input type="text" class="form-control" value="${product.unitMeasure}" readonly>
+                    </div>
+                </div>
+                <!-- Quantidade em Estoque -->
+                <div class="col-xs-12 col-md-3">
+                    <div class="input-container">
+                        <label>Quantidade em Estoque</label>
+                        <input type="number" class="form-control" value="${product.quantity}" readonly>
+                    </div>
+                </div>
+                <!-- Valor Unitário -->
+                <div class="col-xs-12 col-md-3">
+                    <div class="input-container">
+                        <label>Valor Unitário</label>
+                        <input type="number" class="form-control" value="${product.unitPrice}" readonly>
+                    </div>
+                </div>
+                <!-- Valor Total -->
+                <div class="col-xs-12 col-md-3">
+                    <div class="input-container">
+                        <label>Valor Total</label>
+                        <input type="number" class="form-control" value="${product.totalPrice}" readonly>
+                    </div>
+                </div>
             </div>
         `;
-        productContainer.appendChild(descriptionDiv);
 
-        // Unidade de Medida
-        const unitMeasureDiv = document.createElement('div');
-        unitMeasureDiv.className = 'col-xs-12 col-md-2';
-        unitMeasureDiv.innerHTML = `
-            <div class="input-container">
-                <label>Unidade de Medida</label>
-                <input type="text" class="form-control" value="${product.unitMeasure}" readonly>
-            </div>
-        `;
-        productContainer.appendChild(unitMeasureDiv);
-
-        // Quantidade em Estoque
-        const quantityDiv = document.createElement('div');
-        quantityDiv.className = 'col-xs-12 col-md-2';
-        quantityDiv.innerHTML = `
-            <div class="input-container">
-                <label>Quantidade em Estoque</label>
-                <input type="number" class="form-control" value="${product.quantity}" readonly>
-            </div>
-        `;
-        productContainer.appendChild(quantityDiv);
-
-        // Valor Unitário
-        const unitPriceDiv = document.createElement('div');
-        unitPriceDiv.className = 'col-xs-12 col-md-2';
-        unitPriceDiv.innerHTML = `
-            <div class="input-container">
-                <label>Valor Unitário</label>
-                <input type="number" class="form-control" value="${product.unitPrice}" readonly>
-            </div>
-        `;
-        productContainer.appendChild(unitPriceDiv);
-
-        // Valor Total
-        const totalPriceDiv = document.createElement('div');
-        totalPriceDiv.className = 'col-xs-12 col-md-2';
-        totalPriceDiv.innerHTML = `
-            <div class="input-container">
-                <label>Valor Total</label>
-                <input type="number" class="form-control" value="${product.totalPrice}" readonly>
-            </div>
-        `;
-        productContainer.appendChild(totalPriceDiv);
+        // Adiciona o formulário e o botão de remoção ao container do produto
+        productContainer.appendChild(removeBtn);
+        productContainer.appendChild(productForm);
 
         // Adiciona o container do produto à lista de produtos
         productList.appendChild(productContainer);
     });
 }
+
 
 function clearProductForm() {
     document.getElementById('productDescription').value = '';
