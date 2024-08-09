@@ -1,5 +1,4 @@
 let products = [];
-let attachments = [];
 
 function toggleDropdown() {
     const dropdown = document.getElementById('unitMeasureDropdown');
@@ -54,11 +53,12 @@ function updateProductDisplay() {
         removeIcon.alt = 'Remover';
         removeBtn.appendChild(removeIcon);
 
-        // Criação do formulário do produto
+        // Formulário do produto
         const productForm = document.createElement('form');
         productForm.className = 'product-form';
         productForm.innerHTML = `
-                    <h3>Produto ${index + 1}</h3>
+                <fieldset>
+                    <legend>Produto ${index + 1}</legend>
                     <div class="form-content">
                         <!-- Ícone de caixa -->
                         <div class="box-icon">
@@ -105,7 +105,8 @@ function updateProductDisplay() {
                             </div>
                         </div>
                     </div>
-                `;
+                </fieldset>
+            `;
 
         // Adiciona o formulário e o botão de remoção ao container do produto
         productContainer.appendChild(removeBtn);

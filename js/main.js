@@ -1,5 +1,4 @@
 function saveSupplier() {
-
     // Validar os campos obrigatórios
     if (!validateForm()) {
         return;
@@ -33,61 +32,44 @@ function saveSupplier() {
             valorUnitario: product.unitPrice,
             valorTotal: product.totalPrice
         })),
-        anexos: attachments.map((attachment, index) => ({
-            indice: index + 1,
-            nomeArquivo: attachment.name,
-            blobArquivo: attachment.data
-        }))
+        anexos: []
     };
 
-    // Formatar JSON 
-    const formattedJSON = `
-    {
-        razaoSocial: '${supplierData.razaoSocial}',
-        nomeFantasia: '${supplierData.nomeFantasia}',
-        cnpj: '${supplierData.cnpj}',
-        inscricaoEstadual: '${supplierData.inscricaoEstadual}',
-        inscricaoMunicipal: '${supplierData.inscricaoMunicipal}',
-        nomeContato: '${supplierData.nomeContato}',
-        telefoneContato: '${supplierData.telefoneContato}',
-        emailContato: '${supplierData.emailContato}',
-        cep: '${supplierData.cep}',
-        endereco: '${supplierData.endereco}',
-        numero: '${supplierData.numero}',
-        complemento: '${supplierData.complemento}',
-        bairro: '${supplierData.bairro}',
-        municipio: '${supplierData.municipio}',
-        estado: '${supplierData.estado}',
-        produtos: [
-            ${supplierData.produtos.map(product => `
-                {
-                    indice: ${product.indice},
-                    descricaoProduto: '${product.descricaoProduto}',
-                    unidadeMedida: '${product.unidadeMedida}',
-                    qtdeEstoque: '${product.qtdeEstoque}',
-                    valorUnitario: '${product.valorUnitario}',
-                    valorTotal: '${product.valorTotal}'
-                }
-            `).join(',')}
-        ],
-        anexos: [
-            ${supplierData.anexos.map(attachment => `
-                {
-                    indice: ${attachment.indice},
-                    nomeArquivo: '${attachment.nomeArquivo}',
-                    blobArquivo: '${attachment.blobArquivo}'
-                }
-            `).join(',')}
-        ]
-    }`;
+    // Converter anexos para base64 e adicionar ao JSON
+    const promises = attachments.map(file => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                const base64String = reader.result.split(',')[1];
+                supplierData.anexos.push({
+                    indice: attachments.indexOf(file) + 1,
+                    nomeArquivo: file.name,
+                    blobArquivo: base64String
+                });
+                resolve();
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    });
 
-    // Exibir JSON no console
-    console.log(formattedJSON);
+    // Espera que todos os arquivos sejam convertidos antes de continuar
+    Promise.all(promises).then(() => {
+        // Formatar JSON 
+        const formattedJSON = JSON.stringify(supplierData, null, 4);
 
-    // Simulação de salvamento dos dados
-    setTimeout(() => {
-        // Fechar o modal de loading após a simulação de salvamento
+        // Exibir JSON no console
+        console.log(formattedJSON);
+
+        // Simulação de salvamento dos dados
+        setTimeout(() => {
+            // Fechar o modal de loading após a simulação de salvamento
+            document.getElementById('loadingModal').style.display = 'none';
+            alert("Fornecedor salvo com sucesso!");
+        }, 2000);
+    }).catch(error => {
+        console.error('Erro ao processar anexos:', error);
         document.getElementById('loadingModal').style.display = 'none';
-        alert("Fornecedor salvo com sucesso!");
-    }, 2000);
+        alert("Erro ao salvar o fornecedor.");
+    });
 }
