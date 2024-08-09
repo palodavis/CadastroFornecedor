@@ -1,3 +1,10 @@
+.btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+}
 .btn-success {
     width: 100%;           /* Ocupa toda a largura do contêiner */
     padding: 16px 24px;    /* Aumenta o espaçamento interno para tornar o botão maior */
@@ -12,11 +19,28 @@
     transition: background-color 0.3s ease; /* Suaviza a mudança de cor ao passar o mouse */
 }
 
-.error-message {
-    color: red;
-    font-size: 12px;
-    position: absolute;
+.input-container {
+    position: relative;
+    margin-bottom: 15px; /* Ajuste o espaçamento conforme necessário */
 }
+
+.input-container.success input {
+    border-color: #28a745; /* Verde para campos válidos */
+}
+
+.input-container.error input {
+    border-color: #dc3545; /* Vermelho para campos inválidos */
+}
+
+.input-container .error-message {
+    color: #dc3545;
+    display: block;
+}
+
+.input-container.success .error-message {
+    display: none;
+}
+
 
 .dropdown-menu {
     display: none;
@@ -166,4 +190,54 @@
 .action-btn img {
     width: 40px; /* Ajuste conforme necessário */
     height: 40px; /* Ajuste conforme necessário */
+}
+
+.product-list {
+    margin-top: 20px;
+}
+
+.product-item {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.input-container {
+    margin-bottom: 10px;
+}
+
+.input-container label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-control[readonly] {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.action-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Ajustar o ícone de remoção */
+.product-item .action-btn {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    background: none; 
+    border: none; 
+    padding: 0; 
+}
+
+.product-item .action-btn img {
+    margin-top: 25px; 
 }

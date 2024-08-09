@@ -10,6 +10,19 @@ function addAttachment() {
         const attachmentItem = document.createElement('div');
         attachmentItem.className = 'attachment-item';
         
+                
+        // Botão de remoção com ícone
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'action-btn';
+        const removeIcon = document.createElement('img');
+        removeIcon.src = 'icons/fluigicon-trash.png'; 
+        removeIcon.alt = 'Remover';
+        removeBtn.appendChild(removeIcon);
+        removeBtn.onclick = function() {
+            attachmentItem.remove();
+        };
+        attachmentItem.appendChild(removeBtn);
+        
         // Botão de visualizar com ícone
         const viewBtn = document.createElement('button');
         viewBtn.className = 'action-btn';
@@ -26,18 +39,6 @@ function addAttachment() {
             URL.revokeObjectURL(url);
         };
         attachmentItem.appendChild(viewBtn);
-        
-        // Botão de remoção com ícone
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'action-btn';
-        const removeIcon = document.createElement('img');
-        removeIcon.src = 'icons/fluigicon-trash.png'; 
-        removeIcon.alt = 'Remover';
-        removeBtn.appendChild(removeIcon);
-        removeBtn.onclick = function() {
-            attachmentItem.remove();
-        };
-        attachmentItem.appendChild(removeBtn);
         
         // Nome do documento
         const fileName = document.createElement('span');

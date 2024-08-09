@@ -19,144 +19,193 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-7">
                             <label for="razaoSocial">Razão Social</label>
-                            <input type="text" id="razaoSocial" class="form-control" required>
-                            <span class="error-message" id="razaoSocialError"></span>
+                            <div class="input-container">
+                                <input type="text" id="razaoSocial" class="form-control" required>
+                                <span class="error-message" id="razaoSocialError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <label for="cnpj">CNPJ</label>
-                            <input type="text" id="cnpj" class="form-control" required>
-                            <span class="error-message" id="cnpjError"></span>
+                            <div class="input-container">
+                                <input type="text" id="cnpj" class="form-control" required>
+                                <span class="error-message" id="cnpjError"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-7">
                             <label for="nomeFantasia">Nome Fantasia</label>
-                            <input type="text" id="nomeFantasia" class="form-control" required>
-                            <span class="error-message" id="nomeFantasiaError"></span>
+                            <div class="input-container">
+                                <input type="text" id="nomeFantasia" class="form-control" required>
+                                <span class="error-message" id="nomeFantasiaError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <label for="inscricaoEstadual">Inscrição Estadual</label>
-                            <input type="text" id="inscricaoEstadual" class="form-control">
+                            <div class="input-container">
+                                <input type="text" id="inscricaoEstadual" class="form-control">
+                                <span class="error-message" id="inscricaoEstadualError"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-7">
                             <label for="cep">CEP</label>
-                            <input type="text" id="cep" class="form-control" required onblur="fetchAddress()">
-                            <span class="error-message" id="cepError"></span>
+                            <div class="input-container">
+                                <input type="text" id="cep" class="form-control" required onblur="fetchAddress()">
+                                <span class="error-message" id="cepError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <label for="inscricaoMunicipal">Inscrição Municipal</label>
-                            <input type="text" id="inscricaoMunicipal" class="form-control">
+                            <div class="input-container">
+                                <input type="text" id="inscricaoMunicipal" class="form-control">
+                                <span class="error-message" id="inscricaoMunicipalError"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-7">
                             <label for="endereco">Endereço</label>
-                            <input type="text" id="endereco" class="form-control" required>
-                            <span class="error-message" id="enderecoError"></span>
+                            <div class="input-container">
+                                <input type="text" id="endereco" class="form-control" required>
+                                <span class="error-message" id="enderecoError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-5">
                             <label for="numero">Número</label>
-                            <input type="text" id="numero" class="form-control" required>
+                            <div class="input-container">
+                                <input type="text" id="numero" class="form-control" required>
+                                <span class="error-message" id="numeroError"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
                             <label for="complemento">Complemento</label>
-                            <input type="text" id="complemento" class="form-control">
+                            <div class="input-container">
+                                <input type="text" id="complemento" class="form-control">
+                                <span class="error-message" id="complementoError"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-4">
                             <label for="bairro">Bairro</label>
-                            <input type="text" class="form-control" id="bairro" required>
+                            <div class="input-container">
+                                <input type="text" class="form-control" id="bairro" required>
+                                <span class="error-message" id="bairroError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-4">
                             <label for="municipio">Município</label>
-                            <input type="text" class="form-control" id="municipio" required>
+                            <div class="input-container">
+                                <input type="text" class="form-control" id="municipio" required>
+                                <span class="error-message" id="municipioError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-4">
                             <label for="estado">Estado</label>
-                            <input type="text" class="form-control" id="estado" required>
+                            <div class="input-container">
+                                <input type="text" class="form-control" id="estado" required>
+                                <span class="error-message" id="estadoError"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-5">
                             <label for="nomeContato">Nome do Contato</label>
-                            <input type="text" id="nomeContato" class="form-control" required>
-                            <span class="error-message" id="nomeContatoError"></span>
+                            <div class="input-container">
+                                <input type="text" id="nomeContato" class="form-control" required>
+                                <span class="error-message" id="nomeContatoError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <label for="telefoneContato">Telefone</label>
-                            <input type="text" id="telefoneContato" class="form-control" required>
-                            <span class="error-message" id="telefoneContatoError"></span>
+                            <div class="input-container">
+                                <input type="text" id="telefoneContato" class="form-control" required>
+                                <span class="error-message" id="telefoneContatoError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-4">
                             <label for="emailContato">E-mail do Contato</label>
-                            <input type="email" id="emailContato" class="form-control" required>
-                            <span class="error-message" id="emailContatoError"></span>
+                            <div class="input-container">
+                                <input type="email" id="emailContato" class="form-control" required>
+                                <span class="error-message" id="emailContatoError"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
-
 
             <form id="productForm">
                 <div class="border-black supplier-section">
                     <div class="supplier-title">Produtos</div>
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
-                            <label for="productDescription">Descrição</label>
-                            <input type="text" id="productDescription" class="form-control" required>
+                            <div class="input-container">
+                                <label for="productDescription">Descrição</label>
+                                <input type="text" id="productDescription" class="form-control" required>
+                                <span class="error-message" id="productDescriptionError"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-3">
-                            <label for="unitMeasureDropdown">Unidade de Medida</label>
-                            <div class="btn-group">
-                                <button type="button" id="dropdownMenuButton" class="btn-dropdown"
-                                    onclick="toggleDropdown()">Selecione a Unidade <span class="caret"></span></button>
-                                <ul id="unitMeasureDropdown" class="dropdown-menu">
-                                    <li onclick="selectUnit('Unidade1')">Unidade1</li>
-                                    <li onclick="selectUnit('Unidade2')">Unidade2</li>
-                                </ul>
+                            <div class="input-container">
+                                <label for="unitMeasureDropdown">Unidade de Medida</label>
+                                <div class="btn-group">
+                                    <button type="button" id="dropdownMenuButton" class="btn-dropdown"
+                                        onclick="toggleDropdown()">Selecione a Unidade <span
+                                            class="caret"></span></button>
+                                    <ul id="unitMeasureDropdown" class="dropdown-menu">
+                                        <li onclick="selectUnit('kg')">kg</li>
+                                        <li onclick="selectUnit('gramas')">gramas</li>
+                                        <li onclick="selectUnit('pct')">pct</li>
+                                        <li onclick="selectUnit('caixa')">caixa</li>
+                                        <li onclick="selectUnit('litro')">litro</li>
+                                        <li onclick="selectUnit('metro')">metro</li>
+                                    </ul>
+                                </div>
+                                <input type="hidden" id="unitMeasure" class="form-control" required>
+                                <span class="error-message" id="unitMeasureError"></span>
                             </div>
-                            <input type="hidden" id="unitMeasure" class="form-control" required>
                         </div>
                         <div class="col-xs-12 col-md-3">
-                            <label for="quantity">Quantidade em Estoque</label>
-                            <input type="number" id="quantity" class="form-control" oninput="calculateTotal()" required>
+                            <div class="input-container">
+                                <label for="quantity">Quantidade em Estoque</label>
+                                <input type="number" id="quantity" class="form-control" oninput="calculateTotal()"
+                                    required>
+                                <span class="error-message" id="quantityError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-3">
-                            <label for="unitPrice">Valor Unitário</label>
-                            <input type="number" id="unitPrice" class="form-control" step="0.01"
-                                oninput="calculateTotal()" required>
+                            <div class="input-container">
+                                <label for="unitPrice">Valor Unitário</label>
+                                <input type="number" id="unitPrice" class="form-control" step="0.01"
+                                    oninput="calculateTotal()" required>
+                                <span class="error-message" id="unitPriceError"></span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-3">
-                            <label for="totalPrice">Valor Total</label>
-                            <input type="number" id="totalPrice" class="form-control" step="0.01" readonly>    
+                            <div class="input-container">
+                                <label for="totalPrice">Valor Total</label>
+                                <input type="number" id="totalPrice" class="form-control" step="0.01" readonly>
+                                <span class="error-message" id="totalPriceError"></span>
+                            </div>
                         </div>
+
                     </div>
                     <button type="button" class="btn btn-success" onclick="addProduct()">Adicionar Produto</button>
             </form>
-            <div class="table-container">
-                <table class="table table-bordered" id="productTable">
-                    <thead>
-                        <tr>
-                            <th>Descrição</th>
-                            <th>Unidade de Medida</th>
-                            <th>Quantidade em Estoque</th>
-                            <th>Valor Unitário</th>
-                            <th>Valor Total</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productTableBody">
-                    </tbody>
-                </table>
+            
+            <div class="container-fluid">
+                <div class="product-list">
+                    <!-- Container para produtos -->
+                </div>
             </div>
         </div>
+
         <div class="border-black supplier-section">
             <div class="supplier-title">Anexos</div>
             <div class="attachment-form">
@@ -168,6 +217,7 @@
             </div>
             <button type="button" class="btn btn-success" onclick="addAttachment()">Incluir Anexo</button>
         </div>
+
         <button type="button" class="btn btn-success" onclick="saveSupplier()">Salvar Fornecedor</button>
     </div>
     </div>

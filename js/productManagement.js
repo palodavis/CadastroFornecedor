@@ -31,24 +31,89 @@ function addProduct() {
     }
 
     products.push({ description, unitMeasure, quantity, unitPrice, totalPrice });
-    updateProductTable();
+    updateProductDisplay();
     clearProductForm();
 }
+function updateProductDisplay() {
+    const productList = document.querySelector('.product-list');
+    productList.innerHTML = '';
 
-function updateProductTable() {
-    const productTableBody = document.getElementById('productTableBody');
-    productTableBody.innerHTML = '';
     products.forEach((product, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${product.description}</td>
-            <td>${product.unitMeasure}</td>
-            <td>${product.quantity}</td>
-            <td>${product.unitPrice}</td>
-            <td>${product.totalPrice}</td>
-            <td><button type="button" class="btn btn-danger" onclick="removeProduct(${index})">Remover</button></td>
+        // Criação do container do produto
+        const productContainer = document.createElement('div');
+        productContainer.className = 'row product-item';
+
+        // Botão de Remoção
+        const removeDiv = document.createElement('div');
+        removeDiv.className = 'col-xs-12 col-md-1';
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'action-btn';
+        removeBtn.type = 'button';
+        removeBtn.onclick = () => removeProduct(index);
+        const removeIcon = document.createElement('img');
+        removeIcon.src = 'icons/fluigicon-trash.png';
+        removeIcon.alt = 'Remover';
+        removeBtn.appendChild(removeIcon);
+        removeDiv.appendChild(removeBtn);
+        productContainer.appendChild(removeDiv);
+
+        // Descrição do produto
+        const descriptionDiv = document.createElement('div');
+        descriptionDiv.className = 'col-xs-12 col-md-2';
+        descriptionDiv.innerHTML = `
+            <div class="input-container">
+                <label>Descrição</label>
+                <input type="text" class="form-control" value="${product.description}" readonly>
+            </div>
         `;
-        productTableBody.appendChild(row);
+        productContainer.appendChild(descriptionDiv);
+
+        // Unidade de Medida
+        const unitMeasureDiv = document.createElement('div');
+        unitMeasureDiv.className = 'col-xs-12 col-md-2';
+        unitMeasureDiv.innerHTML = `
+            <div class="input-container">
+                <label>Unidade de Medida</label>
+                <input type="text" class="form-control" value="${product.unitMeasure}" readonly>
+            </div>
+        `;
+        productContainer.appendChild(unitMeasureDiv);
+
+        // Quantidade em Estoque
+        const quantityDiv = document.createElement('div');
+        quantityDiv.className = 'col-xs-12 col-md-2';
+        quantityDiv.innerHTML = `
+            <div class="input-container">
+                <label>Quantidade em Estoque</label>
+                <input type="number" class="form-control" value="${product.quantity}" readonly>
+            </div>
+        `;
+        productContainer.appendChild(quantityDiv);
+
+        // Valor Unitário
+        const unitPriceDiv = document.createElement('div');
+        unitPriceDiv.className = 'col-xs-12 col-md-2';
+        unitPriceDiv.innerHTML = `
+            <div class="input-container">
+                <label>Valor Unitário</label>
+                <input type="number" class="form-control" value="${product.unitPrice}" readonly>
+            </div>
+        `;
+        productContainer.appendChild(unitPriceDiv);
+
+        // Valor Total
+        const totalPriceDiv = document.createElement('div');
+        totalPriceDiv.className = 'col-xs-12 col-md-2';
+        totalPriceDiv.innerHTML = `
+            <div class="input-container">
+                <label>Valor Total</label>
+                <input type="number" class="form-control" value="${product.totalPrice}" readonly>
+            </div>
+        `;
+        productContainer.appendChild(totalPriceDiv);
+
+        // Adiciona o container do produto à lista de produtos
+        productList.appendChild(productContainer);
     });
 }
 
@@ -63,5 +128,5 @@ function clearProductForm() {
 
 function removeProduct(index) {
     products.splice(index, 1);
-    updateProductTable();
+    updateProductDisplay();
 }
