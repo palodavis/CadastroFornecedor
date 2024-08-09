@@ -12,10 +12,11 @@ Bem-vindo ao projeto **Cadastro de Fornecedores e Produtos**! Este sistema foi d
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **HTML5**: Estruturação do conteúdo.
-- **CSS3**: Estilização com o uso do Fluig Style Guide e customizações próprias.
-- **JavaScript**: Implementação de funcionalidades interativas e validação de formulários.
-- **Fluig Style Guide**: Uso de componentes visuais padrão para garantir uma experiência de usuário consistente e moderna.
+- ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white) **HTML5**: Estruturação do conteúdo.
+- ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=white) **CSS3**: Estilização com o uso do Fluig Style Guide e customizações próprias.
+- ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black) **JavaScript**: Implementação de funcionalidades interativas e validação de formulários.
+- ![Fluig](https://img.shields.io/badge/-Fluig-00ADEF?style=flat&logoColor=white) **Fluig Style Guide**: Uso de componentes visuais padrão para garantir uma experiência de usuário consistente e moderna.
+
 
 ## 📂 Estrutura do Projeto
 
