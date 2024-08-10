@@ -4,9 +4,9 @@ Bem-vindo ao projeto **Cadastro de Fornecedores e Produtos**! Este sistema foi d
 
 ## 🚀 Funcionalidades
 
-- **Cadastro de Fornecedores:** Preencha e valide informações essenciais, como Razão Social, CNPJ, Nome Fantasia, e dados de contato.
-- **Cadastro de Produtos:** Adicione produtos com informações detalhadas, incluindo descrição, unidade de medida, quantidade em estoque, valor unitário, e cálculo automático do valor total.
-- **Anexos:** Anexe documentos relevantes ao cadastro dos fornecedores de forma prática e organizada.
+- **Cadastro de Fornecedores:** Cadastro de fornecedores, incluindo informações como Razão Social, CNPJ, Nome Fantasia, dados de contato, endereço, entre outros.
+- **Cadastro de Produtos:** Cadastro de produtos com informações detalhadas, incluindo descrição, unidade de medida, quantidade em estoque, valor unitário, e cálculo automático do valor total.
+- **Anexos:** Anexe documentos ao cadastro dos fornecedores de forma simplificada.
 - **Preenchimento Automático de Endereço:** O sistema permite o preenchimento automático do endereço ao informar o CEP.
 - **Gerenciamento de Dados em Tempo Real:** Todos os dados dos produtos e anexos são gerenciados em tempo real com interatividade completa.
 
@@ -38,11 +38,9 @@ Bem-vindo ao projeto **Cadastro de Fornecedores e Produtos**! Este sistema foi d
 
 ## 🎨 Interface do Usuário
 
-A interface foi projetada para ser limpa e intuitiva, com foco na usabilidade:
-
 - **Formulários**: Organizados em seções claras e com validação em tempo real.
-- **Tabela de Produtos**: Apresenta os produtos cadastrados de forma organizada, com opções para remover produtos.
-- **Anexos**: Exibidos com ícones interativos para visualização e remoção.
+- **Tabela de Produtos**:  Produtos cadastrados contendo opção para remover produtos.
+- **Anexos**: Opção para visualização e remoção.
 
 ## 📋 Instruções de Uso
 
@@ -54,7 +52,7 @@ git clone https://github.com/palodavis/CadastroFornecedor.git
 
 ### 🌐 Abrindo o Projeto:
 
-- Navegue até o diretório do projeto e abra o arquivo `index.html` em seu navegador preferido.
+- Navegue até o diretório do projeto e abra o arquivo `index.html` em seu navegador.
 
 ### 📝 Cadastro de Fornecedores e Produtos:
 
