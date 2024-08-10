@@ -52,7 +52,8 @@ git clone https://github.com/palodavis/CadastroFornecedor.git
 
 ### 🌐 Abrindo o Projeto:
 
-- Navegue até o diretório do projeto e abra o arquivo `index.html` em seu navegador.
+- Navegue até o diretório do projeto.  
+- Para executar o arquivo `index.html`, é necessário utilizar um servidor local (localhost). Você pode utilizar ferramentas como o Live Server no VS Code ou rodar um servidor local simples.
 
 ### 📝 Cadastro de Fornecedores e Produtos:
 
