@@ -1,22 +1,26 @@
+// Função para buscar CEP via API usando jQuery
 function fetchAddress() {
-    const cep = document.getElementById('cep').value.replace(/\D/g, '');
+    var cep = $('#cep').val().replace(/\D/g, '');
 
     if (cep) {
-        fetch(`https://viacep.com.br/ws/${cep}/json/`)
-            .then(response => response.json())
-            .then(data => {
+        $.ajax({
+            url: `https://viacep.com.br/ws/${cep}/json/`,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
                 if (!data.erro) {
-                    document.getElementById('endereco').value = data.logradouro;
-                    document.getElementById('bairro').value = data.bairro;
-                    document.getElementById('municipio').value = data.localidade;
-                    document.getElementById('estado').value = data.uf;
+                    $('#endereco').val(data.logradouro);
+                    $('#bairro').val(data.bairro);
+                    $('#municipio').val(data.localidade);
+                    $('#estado').val(data.uf);
                 } else {
                     alert('CEP não encontrado.');
                 }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar o endereço:', error);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Erro ao buscar o endereço:', errorThrown);
                 alert('Erro ao buscar o endereço. Verifique o CEP e tente novamente.');
-            });
+            }
+        });
     }
 }

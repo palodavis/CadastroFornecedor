@@ -20,22 +20,20 @@ function formatPhoneNumber(value) {
 }
 
 // Função para validar o telefone com base na máscara e tipo numérico
-function validatePhoneNumber(inputElement) {
-    const phoneNumber = inputElement.value.trim();
-    const errorElement = document.getElementById(inputElement.id + 'Error');
-    const containerElement = inputElement.parentElement; // Usar o parentElement
+function validatePhoneNumber($inputElement) {
+    const phoneNumber = $inputElement.val().trim();
+    const $errorElement = $('#' + $inputElement.attr('id') + 'Error');
+    const $containerElement = $inputElement.parent(); // Usar o parentElement
 
     // Expressão regular para validar o formato do telefone
     const phoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
 
     if (!phoneRegex.test(phoneNumber)) {
-        containerElement.classList.remove('success');
-        containerElement.classList.add('error');
-        errorElement.textContent = 'Telefone: deve estar no formato (XX) XXXXX-XXXX';
+        $containerElement.removeClass('success').addClass('error');
+        $errorElement.text('Telefone: deve estar no formato (XX) XXXXX-XXXX');
     } else {
-        containerElement.classList.remove('error');
-        containerElement.classList.add('success');
-        errorElement.textContent = '';
+        $containerElement.removeClass('error').addClass('success');
+        $errorElement.text('');
     }
 }
 
@@ -45,115 +43,108 @@ function validateForm(event) {
     let errorMessage = '';
 
     // Valida Razão Social
-    const razaoSocial = document.getElementById('razaoSocial');
-    if (razaoSocial.value.trim() === '') {
-        document.getElementById('razaoSocialError').textContent = 'Razão Social: obrigatório';
-        razaoSocial.parentElement.classList.add('error');
+    const $razaoSocial = $('#razaoSocial');
+    if ($razaoSocial.val().trim() === '') {
+        $('#razaoSocialError').text('Razão Social: obrigatório');
+        $razaoSocial.parent().addClass('error');
         isValid = false;
         errorMessage += 'Razão Social: obrigatório\n';
     } else {
-        document.getElementById('razaoSocialError').textContent = '';
-        razaoSocial.parentElement.classList.remove('error');
-        razaoSocial.parentElement.classList.add('success');
+        $('#razaoSocialError').text('');
+        $razaoSocial.parent().removeClass('error').addClass('success');
     }
 
     // Valida Nome Fantasia
-    const nomeFantasia = document.getElementById('nomeFantasia');
-    if (nomeFantasia.value.trim() === '') {
-        document.getElementById('nomeFantasiaError').textContent = 'Nome Fantasia: obrigatório';
-        nomeFantasia.parentElement.classList.add('error');
+    const $nomeFantasia = $('#nomeFantasia');
+    if ($nomeFantasia.val().trim() === '') {
+        $('#nomeFantasiaError').text('Nome Fantasia: obrigatório');
+        $nomeFantasia.parent().addClass('error');
         isValid = false;
         errorMessage += 'Nome Fantasia: obrigatório\n';
     } else {
-        document.getElementById('nomeFantasiaError').textContent = '';
-        nomeFantasia.parentElement.classList.remove('error');
-        nomeFantasia.parentElement.classList.add('success');
+        $('#nomeFantasiaError').text('');
+        $nomeFantasia.parent().removeClass('error').addClass('success');
     }
 
     // Valida CNPJ
-    const cnpj = document.getElementById('cnpj');
-    if (cnpj.value.trim() === '') {
-        document.getElementById('cnpjError').textContent = 'CNPJ: obrigatório';
-        cnpj.parentElement.classList.add('error');
+    const $cnpj = $('#cnpj');
+    if ($cnpj.val().trim() === '') {
+        $('#cnpjError').text('CNPJ: obrigatório');
+        $cnpj.parent().addClass('error');
         isValid = false;
         errorMessage += 'CNPJ: obrigatório\n';
     } else {
-        document.getElementById('cnpjError').textContent = '';
-        cnpj.parentElement.classList.remove('error');
-        cnpj.parentElement.classList.add('success');
+        $('#cnpjError').text('');
+        $cnpj.parent().removeClass('error').addClass('success');
     }
 
     // Valida Nome do Contato
-    const nomeContato = document.getElementById('nomeContato');
-    if (nomeContato.value.trim() === '') {
-        document.getElementById('nomeContatoError').textContent = 'Nome da pessoa de contato: obrigatório';
-        nomeContato.parentElement.classList.add('error');
+    const $nomeContato = $('#nomeContato');
+    if ($nomeContato.val().trim() === '') {
+        $('#nomeContatoError').text('Nome da pessoa de contato: obrigatório');
+        $nomeContato.parent().addClass('error');
         isValid = false;
         errorMessage += 'Nome da pessoa de contato: obrigatório\n';
     } else {
-        document.getElementById('nomeContatoError').textContent = '';
-        nomeContato.parentElement.classList.remove('error');
-        nomeContato.parentElement.classList.add('success');
+        $('#nomeContatoError').text('');
+        $nomeContato.parent().removeClass('error').addClass('success');
     }
 
     // Valida Telefone
-    const telefoneContato = document.getElementById('telefoneContato');
-    if (telefoneContato.value.trim() === '') {
-        document.getElementById('telefoneContatoError').textContent = 'Telefone: obrigatório';
-        telefoneContato.parentElement.classList.add('error');
+    const $telefoneContato = $('#telefoneContato');
+    if ($telefoneContato.val().trim() === '') {
+        $('#telefoneContatoError').text('Telefone: obrigatório');
+        $telefoneContato.parent().addClass('error');
         isValid = false;
         errorMessage += 'Telefone: obrigatório\n';
     } else {
         // Valida o telefone com base na máscara
-        validatePhoneNumber(telefoneContato);
-        if (telefoneContato.parentElement.classList.contains('error')) {
+        validatePhoneNumber($telefoneContato);
+        if ($telefoneContato.parent().hasClass('error')) {
             isValid = false;
             errorMessage += 'Telefone: formato inválido\n';
         }
     }
 
     // Valida E-mail
-    const emailContato = document.getElementById('emailContato');
-    if (emailContato.value.trim() === '') {
-        document.getElementById('emailContatoError').textContent = 'E-mail: obrigatório';
-        emailContato.parentElement.classList.add('error');
+    const $emailContato = $('#emailContato');
+    if ($emailContato.val().trim() === '') {
+        $('#emailContatoError').text('E-mail: obrigatório');
+        $emailContato.parent().addClass('error');
         isValid = false;
         errorMessage += 'E-mail: obrigatório\n';
-    } else if (!validateEmail(emailContato.value.trim())) {
-        document.getElementById('emailContatoError').textContent = 'E-mail: formato inválido';
-        emailContato.parentElement.classList.add('error');
+    } else if (!validateEmail($emailContato.val().trim())) {
+        $('#emailContatoError').text('E-mail: formato inválido');
+        $emailContato.parent().addClass('error');
         isValid = false;
         errorMessage += 'E-mail: formato inválido\n';
     } else {
-        document.getElementById('emailContatoError').textContent = '';
-        emailContato.parentElement.classList.remove('error');
-        emailContato.parentElement.classList.add('success');
+        $('#emailContatoError').text('');
+        $emailContato.parent().removeClass('error').addClass('success');
     }
 
     // Valida Endereço
-    const endereco = document.getElementById('endereco');
-    if (endereco.value.trim() === '') {
-        document.getElementById('enderecoError').textContent = 'Endereço: obrigatório';
-        endereco.parentElement.classList.add('error');
+    const $endereco = $('#endereco');
+    if ($endereco.val().trim() === '') {
+        $('#enderecoError').text('Endereço: obrigatório');
+        $endereco.parent().addClass('error');
         isValid = false;
         errorMessage += 'Endereço: obrigatório\n';
     } else {
-        document.getElementById('enderecoError').textContent = '';
-        endereco.parentElement.classList.remove('error');
-        endereco.parentElement.classList.add('success');
+        $('#enderecoError').text('');
+        $endereco.parent().removeClass('error').addClass('success');
     }
 
     // Valida CEP
-    const cep = document.getElementById('cep');
-    if (cep.value.trim() === '') {
-        document.getElementById('cepError').textContent = 'CEP: obrigatório';
-        cep.parentElement.classList.add('error');
+    const $cep = $('#cep');
+    if ($cep.val().trim() === '') {
+        $('#cepError').text('CEP: obrigatório');
+        $cep.parent().addClass('error');
         isValid = false;
         errorMessage += 'CEP: obrigatório\n';
     } else {
-        document.getElementById('cepError').textContent = '';
-        cep.parentElement.classList.remove('error');
-        cep.parentElement.classList.add('success');
+        $('#cepError').text('');
+        $cep.parent().removeClass('error').addClass('success');
     }
 
     if (!isValid) {
@@ -165,24 +156,22 @@ function validateForm(event) {
 }
 
 // Função de validação para os campos enquanto são digitados
-function validateField(inputElement) {
-    const errorElement = document.getElementById(inputElement.id + 'Error');
-    const containerElement = inputElement.parentElement; // Usar o parentElement
+function validateField($inputElement) {
+    const $errorElement = $('#' + $inputElement.attr('id') + 'Error');
+    const $containerElement = $inputElement.parent(); // Usar o parentElement
 
-    if (inputElement.checkValidity()) {
-        if (inputElement.id === 'telefoneContato') {
+    if ($inputElement[0].checkValidity()) {
+        if ($inputElement.attr('id') === 'telefoneContato') {
             // Formata o número enquanto o usuário digita
-            inputElement.value = formatPhoneNumber(inputElement.value);
-            validatePhoneNumber(inputElement);
+            $inputElement.val(formatPhoneNumber($inputElement.val()));
+            validatePhoneNumber($inputElement);
         } else {
-            containerElement.classList.remove('error');
-            containerElement.classList.add('success');
-            errorElement.textContent = '';
+            $containerElement.removeClass('error').addClass('success');
+            $errorElement.text('');
         }
     } else {
-        containerElement.classList.remove('success');
-        containerElement.classList.add('error');
-        errorElement.textContent = inputElement.validationMessage;
+        $containerElement.removeClass('success').addClass('error');
+        $errorElement.text($inputElement[0].validationMessage);
     }
 }
 
@@ -192,68 +181,63 @@ function validateProductForm() {
     let errorMessage = '';
 
     // Valida Descrição
-    const productDescription = document.getElementById('productDescription');
-    if (productDescription.value.trim() === '') {
-        document.getElementById('productDescriptionError').textContent = 'Descrição: obrigatório';
-        productDescription.parentElement.classList.add('error');
+    const $productDescription = $('#productDescription');
+    if ($productDescription.val().trim() === '') {
+        $('#productDescriptionError').text('Descrição: obrigatório');
+        $productDescription.parent().addClass('error');
         isValid = false;
         errorMessage += 'Descrição: obrigatório\n';
     } else {
-        document.getElementById('productDescriptionError').textContent = '';
-        productDescription.parentElement.classList.remove('error');
-        productDescription.parentElement.classList.add('success');
+        $('#productDescriptionError').text('');
+        $productDescription.parent().removeClass('error').addClass('success');
     }
 
     // Valida Unidade de Medida
-    const unitMeasure = document.getElementById('unitMeasure');
-    if (unitMeasure.value.trim() === '') {
-        document.getElementById('unitMeasureError').textContent = 'Unidade de Medida: obrigatório';
-        unitMeasure.parentElement.classList.add('error');
+    const $unitMeasure = $('#unitMeasure');
+    if ($unitMeasure.val().trim() === '') {
+        $('#unitMeasureError').text('Unidade de Medida: obrigatório');
+        $unitMeasure.parent().addClass('error');
         isValid = false;
         errorMessage += 'Unidade de Medida: obrigatório\n';
     } else {
-        document.getElementById('unitMeasureError').textContent = '';
-        unitMeasure.parentElement.classList.remove('error');
-        unitMeasure.parentElement.classList.add('success');
+        $('#unitMeasureError').text('');
+        $unitMeasure.parent().removeClass('error').addClass('success');
     }
 
     // Valida Quantidade em Estoque
-    const quantity = document.getElementById('quantity');
-    if (quantity.value.trim() === '') {
-        document.getElementById('quantityError').textContent = 'Quantidade em Estoque: obrigatório';
-        quantity.parentElement.classList.add('error');
+    const $quantity = $('#quantity');
+    if ($quantity.val().trim() === '') {
+        $('#quantityError').text('Quantidade em Estoque: obrigatório');
+        $quantity.parent().addClass('error');
         isValid = false;
         errorMessage += 'Quantidade em Estoque: obrigatório\n';
     } else {
-        document.getElementById('quantityError').textContent = '';
-        quantity.parentElement.classList.remove('error');
-        quantity.parentElement.classList.add('success');
+        $('#quantityError').text('');
+        $quantity.parent().removeClass('error').addClass('success');
     }
 
     // Valida Valor Unitário
-    const unitPrice = document.getElementById('unitPrice');
-    if (unitPrice.value.trim() === '') {
-        document.getElementById('unitPriceError').textContent = 'Valor Unitário: obrigatório';
-        unitPrice.parentElement.classList.add('error');
+    const $unitPrice = $('#unitPrice');
+    if ($unitPrice.val().trim() === '') {
+        $('#unitPriceError').text('Valor Unitário: obrigatório');
+        $unitPrice.parent().addClass('error');
         isValid = false;
         errorMessage += 'Valor Unitário: obrigatório\n';
     } else {
-        document.getElementById('unitPriceError').textContent = '';
-        unitPrice.parentElement.classList.remove('error');
-        unitPrice.parentElement.classList.add('success');
+        $('#unitPriceError').text('');
+        $unitPrice.parent().removeClass('error').addClass('success');
     }
 
     // Valida Valor Total
-    const totalPrice = document.getElementById('totalPrice');
-    if (totalPrice.value.trim() === '') {
-        document.getElementById('totalPriceError').textContent = 'Valor Total: obrigatório';
-        totalPrice.parentElement.classList.add('error');
+    const $totalPrice = $('#totalPrice');
+    if ($totalPrice.val().trim() === '') {
+        $('#totalPriceError').text('Valor Total: obrigatório');
+        $totalPrice.parent().addClass('error');
         isValid = false;
         errorMessage += 'Valor Total: obrigatório\n';
     } else {
-        document.getElementById('totalPriceError').textContent = '';
-        totalPrice.parentElement.classList.remove('error');
-        totalPrice.parentElement.classList.add('success');
+        $('#totalPriceError').text('');
+        $totalPrice.parent().removeClass('error').addClass('success');
     }
 
     if (!isValid) {
@@ -263,7 +247,6 @@ function validateProductForm() {
     return isValid;
 }
 
-// Adiciona o evento de validação a todos os campos
-document.querySelectorAll('.form-control').forEach(input => {
-    input.addEventListener('input', () => validateField(input));
+$('.form-control').on('input', function() {
+    validateField($(this));
 });

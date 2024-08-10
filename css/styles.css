@@ -124,6 +124,7 @@
     margin-top: 20px;
 }
 
+/* Modal de carregamento */
 .loading-modal {
     display: none;
     position: fixed;
@@ -137,6 +138,7 @@
     z-index: 1000;
 }
 
+/* Formulário de anexos */
 .attachment-form {
     border: 1px solid #ccc;
     padding: 10px;
@@ -178,6 +180,7 @@
     color: #333;
 }
 
+/* Botões de ação */
 .action-btn {
     background: none;
     border: none;
@@ -191,40 +194,18 @@
     height: 40px;
 }
 
+/* Lista e item de produtos */
 .product-list {
     margin-top: 20px;
 }
 
 .product-item {
-    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
-}
-
-.input-container {
-    margin-bottom: 10px;
-}
-
-.input-container label {
-    display: block;
-    font-weight: bold;
-}
-
-.form-control[readonly] {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-}
-
-.action-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.action-btn img {
-    width: 40px;
-    height: 40px;
 }
 
 .product-item-container {
@@ -234,6 +215,7 @@
     padding: 10px;
 }
 
+/* Botões de remoção e ícones */
 .remove-btn {
     background: none;
     border: none;
@@ -251,6 +233,9 @@
 
 .box-icon {
     margin-right: 15px;
+    display: flex;
+    align-items: center;
+    margin-top: 19px;
 }
 
 .box-icon img {
@@ -258,12 +243,7 @@
     height: 100px;
 }
 
-.product-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
+/* Detalhes do produto e formulário */
 .product-form {
     flex: 1;
     border: 1px solid #ddd;
@@ -282,18 +262,7 @@
     width: 100%;
 }
 
-.box-icon {
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    margin-top: 19px;
-}
-
-.box-icon img {
-    width: 100px;
-    height: 100px;
-}
-
 .product-details {
     flex: 1;
 }
+

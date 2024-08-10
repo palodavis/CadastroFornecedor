@@ -3,65 +3,51 @@ let attachments = [];
 
 // Função para adicionar arquivos
 function addAttachment() {
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
+    const fileInput = $('#fileInput');
+    const file = fileInput[0].files[0];
+    
     if (file) {
-        const attachmentList = document.getElementById('attachmentList');
+        const attachmentList = $('#attachmentList');
 
         // Verifica se já existe um fieldset, caso contrário, cria um
-        let fieldset = document.querySelector('#attachmentList fieldset');
-        if (!fieldset) {
-            fieldset = document.createElement('fieldset');
-            const legend = document.createElement('legend');
-            legend.textContent = 'Itens';
-            fieldset.appendChild(legend);
-            attachmentList.appendChild(fieldset);
+        let $fieldset = $('#attachmentList fieldset');
+        if ($fieldset.length === 0) {
+            $fieldset = $('<fieldset>').append('<legend>Itens</legend>');
+            attachmentList.append($fieldset);
         }
 
         // Criação do item de anexo
-        const attachmentItem = document.createElement('div');
-        attachmentItem.className = 'attachment-item';
+        const $attachmentItem = $('<div>').addClass('attachment-item');
 
         // Botão de remoção com ícone
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'action-btn';
-        const removeIcon = document.createElement('img');
-        removeIcon.src = 'icons/fluigicon-trash.png'; 
-        removeIcon.alt = 'Remover';
-        removeBtn.appendChild(removeIcon);
-        removeBtn.onclick = function() {
-            attachmentItem.remove();
+        const $removeBtn = $('<button>').addClass('action-btn');
+        const $removeIcon = $('<img>').attr('src', 'icons/fluigicon-trash.png').attr('alt', 'Remover');
+        $removeBtn.append($removeIcon).click(function() {
+            $attachmentItem.remove();
             attachments = attachments.filter(a => a !== file); // Remover o arquivo da lista de anexos
-            if (fieldset.childElementCount === 1) { // Se o fieldset estiver vazio exceto pela legenda
-                fieldset.remove();
+            if ($fieldset.children().length === 1) { // Se o fieldset estiver vazio exceto pela legenda
+                $fieldset.remove();
             }
-        };
-        attachmentItem.appendChild(removeBtn);
+        });
+        $attachmentItem.append($removeBtn);
 
         // Botão de visualizar com ícone
-        const viewBtn = document.createElement('button');
-        viewBtn.className = 'action-btn';
-        const viewIcon = document.createElement('img');
-        viewIcon.src = 'icons/fluigicon-eye-open.png'; 
-        viewIcon.alt = 'Visualizar';
-        viewBtn.appendChild(viewIcon);
-        viewBtn.onclick = function() {
+        const $viewBtn = $('<button>').addClass('action-btn');
+        const $viewIcon = $('<img>').attr('src', 'icons/fluigicon-eye-open.png').attr('alt', 'Visualizar');
+        $viewBtn.append($viewIcon).click(function() {
             const url = URL.createObjectURL(file);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = file.name; // Nome do arquivo para download
-            a.click();
+            const $a = $('<a>').attr('href', url).attr('download', file.name); // Nome do arquivo para download
+            $a[0].click();
             URL.revokeObjectURL(url);
-        };
-        attachmentItem.appendChild(viewBtn);
+        });
+        $attachmentItem.append($viewBtn);
 
         // Nome do documento
-        const fileName = document.createElement('span');
-        fileName.textContent = `Documento Anexo ${attachmentCounter}`;
-        attachmentItem.appendChild(fileName);
+        const $fileName = $('<span>').text(`Documento Anexo ${attachmentCounter}`);
+        $attachmentItem.append($fileName);
 
         // Adiciona o item ao fieldset
-        fieldset.appendChild(attachmentItem);
+        $fieldset.append($attachmentItem);
 
         // Adiciona o arquivo à lista de anexos
         attachments.push(file);
@@ -70,7 +56,7 @@ function addAttachment() {
         attachmentCounter++;
 
         // Limpa o input de arquivo
-        fileInput.value = '';
+        fileInput.val('');
     } else {
         alert('Selecione um arquivo para anexar.');
     }
@@ -78,15 +64,14 @@ function addAttachment() {
 
 // Atualizar tabela dos arquivos
 function updateAttachmentTable() {
-    const attachmentTableBody = document.querySelector('#attachmentTable tbody');
-    attachmentTableBody.innerHTML = '';
+    const $attachmentTableBody = $('#attachmentTable tbody');
+    $attachmentTableBody.empty();
     attachments.forEach((attachment, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+        const $row = $('<tr>').html(`
             <td>${attachment.name}</td>
             <td><button type="button" class="btn btn-danger" onclick="removeAttachment(${index})">Remover</button></td>
-        `;
-        attachmentTableBody.appendChild(row);
+        `);
+        $attachmentTableBody.append($row);
     });
 }
 

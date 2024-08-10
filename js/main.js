@@ -1,3 +1,4 @@
+// Função para salvar fornecedor
 function saveSupplier() {
     // Validar os campos obrigatórios
     if (!validateForm()) {
@@ -5,25 +6,25 @@ function saveSupplier() {
     }
 
     // Mostrar modal de loading
-    document.getElementById('loadingModal').style.display = 'flex';
+    $('#loadingModal').css('display', 'flex');
 
     // Obter dados do fornecedor
     const supplierData = {
-        razaoSocial: document.getElementById('razaoSocial').value,
-        nomeFantasia: document.getElementById('nomeFantasia').value,
-        cnpj: document.getElementById('cnpj').value,
-        inscricaoEstadual: document.getElementById('inscricaoEstadual').value,
-        inscricaoMunicipal: document.getElementById('inscricaoMunicipal').value,
-        nomeContato: document.getElementById('nomeContato').value,
-        telefoneContato: document.getElementById('telefoneContato').value,
-        emailContato: document.getElementById('emailContato').value,
-        cep: document.getElementById('cep').value,
-        endereco: document.getElementById('endereco').value,
-        numero: document.getElementById('numero').value,
-        complemento: document.getElementById('complemento').value,
-        bairro: document.getElementById('bairro').value,
-        municipio: document.getElementById('municipio').value,
-        estado: document.getElementById('estado').value,
+        razaoSocial: $('#razaoSocial').val(),
+        nomeFantasia: $('#nomeFantasia').val(),
+        cnpj: $('#cnpj').val(),
+        inscricaoEstadual: $('#inscricaoEstadual').val(),
+        inscricaoMunicipal: $('#inscricaoMunicipal').val(),
+        nomeContato: $('#nomeContato').val(),
+        telefoneContato: $('#telefoneContato').val(),
+        emailContato: $('#emailContato').val(),
+        cep: $('#cep').val(),
+        endereco: $('#endereco').val(),
+        numero: $('#numero').val(),
+        complemento: $('#complemento').val(),
+        bairro: $('#bairro').val(),
+        municipio: $('#municipio').val(),
+        estado: $('#estado').val(),
         produtos: products.map((product, index) => ({
             indice: index + 1,
             descricaoProduto: product.description,
@@ -64,34 +65,36 @@ function saveSupplier() {
         // Simulação de salvamento dos dados
         setTimeout(() => {
             // Fechar o modal de loading após a simulação de salvamento
-            document.getElementById('loadingModal').style.display = 'none';
+            $('#loadingModal').css('display', 'none');
             alert("Fornecedor salvo com sucesso!");
             // Limpar campos do formulário
             clearSupplierForm();
         }, 2000);
     }).catch(error => {
         console.error('Erro ao processar anexos:', error);
-        document.getElementById('loadingModal').style.display = 'none';
+        $('#loadingModal').css('display', 'none');
         alert("Erro ao salvar o fornecedor.");
     });
 }
 
-
-// Limpar o formulário
+// Função para limpar o formulário
 function clearSupplierForm() {
-    document.getElementById('razaoSocial').value = '';
-    document.getElementById('nomeFantasia').value = '';
-    document.getElementById('cnpj').value = '';
-    document.getElementById('inscricaoEstadual').value = '';
-    document.getElementById('inscricaoMunicipal').value = '';
-    document.getElementById('nomeContato').value = '';
-    document.getElementById('telefoneContato').value = '';
-    document.getElementById('emailContato').value = '';
-    document.getElementById('cep').value = '';
-    document.getElementById('endereco').value = '';
-    document.getElementById('numero').value = '';
-    document.getElementById('complemento').value = '';
-    document.getElementById('bairro').value = '';
-    document.getElementById('municipio').value = '';
-    document.getElementById('estado').value = '';
+    // Limpar valores dos campos
+    $('#razaoSocial').val('');
+    $('#nomeFantasia').val('');
+    $('#cnpj').val('');
+    $('#inscricaoEstadual').val('');
+    $('#inscricaoMunicipal').val('');
+    $('#nomeContato').val('');
+    $('#telefoneContato').val('');
+    $('#emailContato').val('');
+    $('#cep').val('');
+    $('#endereco').val('');
+    $('#numero').val('');
+    $('#complemento').val('');
+    $('#bairro').val('');
+    $('#municipio').val('');
+    $('#estado').val('');
+    $('#attachmentList').empty();  // Limpar lista de anexos
+    attachments = []; // Limpar lista de anexos
 }

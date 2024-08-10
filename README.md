@@ -24,8 +24,14 @@ Bem-vindo ao projeto **Cadastro de Fornecedores e Produtos**! Este sistema foi d
 ├── css/
 │   ├── fluig-style-guide.min.css
 │   └── styles.css
+├── icons/
 ├── js/
+│   └── fetchAddress.js
+│   └── fileManagement.js
+│   └── formValidation.js
+│   └── jquery-3.5.1.min.js
 │   └── main.js
+│   └── productManagement.js
 ├── index.html
 └── README.md
 ```
